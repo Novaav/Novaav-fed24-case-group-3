@@ -6,6 +6,7 @@ interface SelectFilterProps {
   label: string;
   legend: string;
   listItems: { id: string; label: string }[];
+  callback: () => void;
 }
 
 export const SelectFilter = (p: SelectFilterProps) => {
@@ -17,9 +18,7 @@ export const SelectFilter = (p: SelectFilterProps) => {
       const newList = list.filter((id) => id !== e.detail.id);
       setList(newList);
     }
-    console.log(e.detail.isChecked);
   };
-  console.log("Här är den:", list);
 
   return (
     <>
@@ -29,6 +28,7 @@ export const SelectFilter = (p: SelectFilterProps) => {
         afSubmitButtonText={p.buttonText}
         afName={p.legend}
         afListItems={p.listItems}
+        onAfSubmitFilter={p.callback}
       />
     </>
   );
