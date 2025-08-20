@@ -1,21 +1,43 @@
 import "./css/App.css";
-import { JobsContextProvider } from "./context/JobsContext";
-import { useEffect } from "react";
-import { fetchJobs } from "./api/api";
+import { JobsContext, JobsContextProvider } from "./context/JobsContext";
+import { useContext, useEffect } from "react";
+import {
+  EducationContext,
+  EducationContextProvider,
+} from "./context/EducationsContext";
 
-function App() {
+const TestComponent = () => {
+  const { fetchJobs, jobs } = useContext(JobsContext);
+
   useEffect(() => {
-    const fetch = async () => {
-      const fetchedJobs = await fetchJobs("utvecklare");
-      console.log(fetchedJobs);
-    };
-
-    fetch();
+    fetchJobs("utvecklare");
   }, []);
 
+  console.log(jobs);
+
+  return <div>Test Component</div>;
+};
+
+const TestComponent2 = () => {
+  const { fetchEducations, educations } = useContext(EducationContext);
+
+  useEffect(() => {
+    fetchEducations("utvecklare");
+  }, []);
+
+  console.log(educations);
+
+  return <div>Test Component 2</div>;
+};
+
+function App() {
   return (
     <JobsContextProvider>
-      <h1>Case 1, grupp 3</h1>
+      <EducationContextProvider>
+        <h1>Case 1, grupp 3</h1>
+        <TestComponent />
+        <TestComponent2 />
+      </EducationContextProvider>
     </JobsContextProvider>
   );
 }

@@ -7,17 +7,17 @@ export type jobsState = {
 };
 
 export type JobsActionType =
-  | { type: "FETCH_START" }
-  | { type: "FETCH_SUCCESS"; payload: Job[] }
-  | { type: "FETCH_ERROR"; payload: string };
+  | { type: "FETCH_JOBS_REQUEST" }
+  | { type: "FETCH_JOBS_SUCCESS"; payload: Job[] }
+  | { type: "FETCH_JOBS_ERROR"; payload: string };
 
 export const jobsReducer = (state: jobsState, action: JobsActionType) => {
   switch (action.type) {
-    case "FETCH_START":
+    case "FETCH_JOBS_REQUEST":
       return { ...state, loading: true };
-    case "FETCH_SUCCESS":
+    case "FETCH_JOBS_SUCCESS":
       return { ...state, loading: false, jobs: action.payload };
-    case "FETCH_ERROR":
+    case "FETCH_JOBS_ERROR":
       return { ...state, loading: false, error: action.payload };
     default:
       return state;

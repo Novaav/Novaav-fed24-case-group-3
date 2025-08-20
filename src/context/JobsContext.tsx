@@ -29,13 +29,13 @@ export const JobsContextProvider = ({
   });
 
   const fetchJobsHandler = async (query: string) => {
-    dispatch({ type: "FETCH_START" });
+    dispatch({ type: "FETCH_JOBS_REQUEST" });
     try {
       const jobs = await fetchJobs(query);
-      dispatch({ type: "FETCH_SUCCESS", payload: jobs });
+      dispatch({ type: "FETCH_JOBS_SUCCESS", payload: jobs });
     } catch (error) {
       const message = error instanceof Error ? error.message : "Unknown error";
-      dispatch({ type: "FETCH_ERROR", payload: message });
+      dispatch({ type: "FETCH_JOBS_ERROR", payload: message });
     }
   };
 

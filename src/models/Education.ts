@@ -1,7 +1,7 @@
 export interface Education {
   id: string; // Unikt id för utbildningen
   code?: string; // Programkod, t.ex. "YH00794"
-  title?: string; // Utbildningens titel (svenska)
+  title?: string; // Utbildningens titel
   description?: string; // Beskrivning av utbildningen
   providers?: string[]; // Lista med utbildningsanordnare
   credits?: number; // Antal poäng (t.ex. 400)
