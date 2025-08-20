@@ -11,14 +11,15 @@ interface SelectFilterProps {
 export const SelectFilter = (p: SelectFilterProps) => {
   const [list, setList] = useState<string[]>([]);
   const filter = (e) => {
-    // let list = [];
-
     if (e.detail.isChecked === true) {
       setList([...list, e.detail.id]);
+    } else {
+      const newList = list.filter((id) => id !== e.detail.id);
+      setList(newList);
     }
     console.log(e.detail.isChecked);
-    console.log("Här är den:", list);
   };
+  console.log("Här är den:", list);
 
   return (
     <>
