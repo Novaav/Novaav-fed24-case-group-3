@@ -1,6 +1,6 @@
 import type { Job } from "../models/Job";
 
-export async function fetchJobs(query: string): Promise<Job[]> {
+export const fetchJobs = async (query: string): Promise<Job[]> => {
   const res = await fetch(
     `https://jobsearch.api.jobtechdev.se/search?q=${query}`
   );
@@ -9,4 +9,4 @@ export async function fetchJobs(query: string): Promise<Job[]> {
   }
   const data = await res.json();
   return data.hits as Job[];
-}
+};

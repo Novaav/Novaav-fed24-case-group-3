@@ -5,9 +5,7 @@ import { fetchJobs } from "./api/api";
 
 function App() {
   useEffect(() => {
-    // Fetch initial jobs data
     const fetch = async () => {
-      // Call the fetchJobs function from context
       const fetchedJobs = await fetchJobs("utvecklare");
       console.log(fetchedJobs);
     };
