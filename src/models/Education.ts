@@ -9,4 +9,7 @@ export interface Education {
   formCode?: string; // Form, t.ex. "yrkeshögskoleutbildning"
   distance?: boolean; // Om utbildningen är på distans
   executions?: { start: string; end: string }[]; // Start- och slutdatum för utbildningen
+
+  paceOfStudyPercentage?: number[]; //Studietakt
+  regionCode?: string[]; //områdes kod
 }

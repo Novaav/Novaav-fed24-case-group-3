@@ -7,7 +7,6 @@ import { GlobalContextProvider } from "./context/GlobalContext";
 function App() {
   return (
     <>
-      <FilterContainer />
       <GlobalContextProvider>
         <RouterProvider router={router}></RouterProvider>
       </GlobalContextProvider>
