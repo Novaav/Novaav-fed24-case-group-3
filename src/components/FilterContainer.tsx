@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { SelectFilter } from "./SelectFilter";
 import type { responseData } from "../models/Education";
+import { EducationContext } from "../context/EducationsContext";
 
 interface ApiResponse {
   result: responseData[];
@@ -11,7 +12,10 @@ export const FilterContainer = () => {
     useState<{ id: string; label: string }[]>();
   const [paceOfStudy, setPaceOfStudy] =
     useState<{ id: string; label: string }[]>();
-  const [realData, setRealData] = useState<ApiResponse | null>();
+  // const [realData, setRealData] = useState<ApiResponse | null>();
+  const { educations, loading, error, fetchEducations } =
+    useContext(EducationContext);
+
   const [filterPaceOfStudy, setFilterPaceOfStudy] = useState<string[]>();
   const [filterLocation, setFilterLocation] = useState<string[]>();
 
@@ -45,18 +49,24 @@ export const FilterContainer = () => {
         });
         setLocationData(newData);
       });
-
-    fetch(
-      " https://jobed-connect-api.jobtechdev.se/v1/educations?query=förskollärare"
-    )
-      .then((data) => {
-        return data.json();
-      })
-      .then((data) => {
-        getPaceOfStudies(data);
-        setRealData(data);
-      });
   }, []);
+
+  //   fetch(
+  //     " https://jobed-connect-api.jobtechdev.se/v1/educations?query=förskollärare"
+  //   )
+  //     .then((data) => {
+  //       return data.json();
+  //     })
+  //     .then((data) => {
+  //       getPaceOfStudies(data);
+  //       setRealData(data);
+  //     });
+  // }, []);
+
+  // TODO: vad ska stå i strängen??
+  useEffect(() => {
+    fetchEducations("");
+  }, [fetchEducations]);
 
   const filterForPaceOfStudy = (data: responseData[]) => {
     if (filterPaceOfStudy && filterPaceOfStudy.length) {
@@ -98,7 +108,7 @@ export const FilterContainer = () => {
     return filteredData;
   };
 
-  const filteredData = filterData(realData?.result ?? []);
+  const filteredData = filterData(educations);
   console.log(filteredData);
 
   return (
