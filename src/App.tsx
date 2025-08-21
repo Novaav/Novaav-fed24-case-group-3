@@ -1,11 +1,16 @@
 import { FilterContainer } from "./components/FilterContainer";
 import "./css/App.css";
+import { router } from "./Router";
+import { RouterProvider } from "react-router";
+import { GlobalContextProvider } from "./context/GlobalContext";
 
 function App() {
   return (
     <>
-      <h1>Case 1, grupp 3</h1>
       <FilterContainer />
+      <GlobalContextProvider>
+        <RouterProvider router={router}></RouterProvider>
+      </GlobalContextProvider>
     </>
   );
 }
