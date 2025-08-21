@@ -1,17 +1,15 @@
 import { useContext, useEffect, useState } from "react";
 import { SelectFilter } from "./SelectFilter";
-import type { responseData } from "../models/Education";
+import type { ResponseData } from "../models/Education";
 import { EducationContext } from "../context/EducationsContext";
 
-interface ApiResponse {
-  result: responseData[];
-}
-
 export const FilterContainer = () => {
-  const [locationData, setLocationData] =
-    useState<{ id: string; label: string }[]>();
-  const [paceOfStudy, setPaceOfStudy] =
-    useState<{ id: string; label: string }[]>();
+  const [locationData, setLocationData] = useState<
+    { id: string; label: string }[]
+  >([]);
+  const [paceOfStudy, setPaceOfStudy] = useState<
+    { id: string; label: string }[]
+  >([]);
   // const [realData, setRealData] = useState<ApiResponse | null>();
   const { educations, loading, error, fetchEducations } =
     useContext(EducationContext);
@@ -20,10 +18,10 @@ export const FilterContainer = () => {
   const [filterLocation, setFilterLocation] = useState<string[]>();
 
   //   detta är funktionen som hittar studietakter utifrån datan vi får från fetchen. behöver datan från context
-  const getPaceOfStudies = (data: ApiResponse) => {
+  const getPaceOfStudies = (data: ResponseData[]) => {
     let paceOfStudyList: { id: string; label: string }[] = [];
     //startvärde 0 pga kom upp dubliceringar utav procentenheterna
-    data.result.forEach((item) => {
+    data.forEach((item) => {
       const paceOfStudy = item.eventSummary?.paceOfStudyPercentage?.[0];
       const exist = paceOfStudyList.find(
         (i) => i.id === JSON.stringify(paceOfStudy)
@@ -65,10 +63,15 @@ export const FilterContainer = () => {
 
   // TODO: vad ska stå i strängen??
   useEffect(() => {
-    fetchEducations("");
-  }, [fetchEducations]);
+    fetchEducations("förskolelärare");
+  }, []);
 
-  const filterForPaceOfStudy = (data: responseData[]) => {
+  // test
+  useEffect(() => {
+    console.log("Educations i context:", educations);
+  }, []);
+
+  const filterForPaceOfStudy = (data: ResponseData[]) => {
     if (filterPaceOfStudy && filterPaceOfStudy.length) {
       const filteredData = data.filter((item) => {
         const percentage = item.eventSummary?.paceOfStudyPercentage?.[0];
@@ -83,7 +86,7 @@ export const FilterContainer = () => {
     }
   };
 
-  const filterForLocation = (data: responseData[]) => {
+  const filterForLocation = (data: ResponseData[]) => {
     if (filterLocation && filterLocation.length) {
       const filteredData = data.filter((item /**TODO: fix typing */) => {
         const locations = item.eventSummary?.regionCode;
@@ -102,14 +105,14 @@ export const FilterContainer = () => {
     }
   };
 
-  const filterData = (data: responseData[]) => {
+  const filterData = (data: ResponseData[]) => {
     const filter1 = filterForPaceOfStudy(data);
     const filteredData = filterForLocation(filter1);
     return filteredData;
   };
 
   const filteredData = filterData(educations);
-  console.log(filteredData);
+  console.log("data som är filtrerad", filteredData);
 
   return (
     <>

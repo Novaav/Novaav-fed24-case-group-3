@@ -16,7 +16,7 @@ interface EventSummary {
   regionCode?: string[]; //områdes kod
 }
 
-export interface responseData {
+export interface ResponseData {
   education?: Education;
   eventSummary?: EventSummary;
 }
