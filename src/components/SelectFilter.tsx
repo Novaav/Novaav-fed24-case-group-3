@@ -1,3 +1,8 @@
+import type {
+  DigiFormFilterCustomEvent,
+  FilterChange,
+  FormFilterState,
+} from "@digi/arbetsformedlingen";
 import { DigiFormFilter } from "@digi/arbetsformedlingen-react";
 import { useState } from "react";
 
@@ -6,38 +11,46 @@ interface SelectFilterProps {
   label: string;
   legend: string;
   listItems: { id: string; label: string }[];
-  callback: (e: FilterEvent) => void;
-}
-// behöver skapa datatyper pga AF-digi-komponenter
-interface FilterEventDetail {
-  id: string;
-  isChecked: boolean;
-  checked?: string[];
-}
-interface FilterEvent extends CustomEvent {
-  detail: FilterEventDetail;
+  onSubmit: (arg: string[]) => void;
+  onReset: () => void;
 }
 
 export const SelectFilter = (p: SelectFilterProps) => {
-  const [list, setList] = useState<string[]>([]);
-  const filter = (e: FilterEvent) => {
-    if (e.detail.isChecked === true) {
-      setList([...list, e.detail.id]);
+  const [listOfFilters, setListOfFilters] = useState<string[]>([]);
+
+  const handleSetFilter = (
+    item: DigiFormFilterCustomEvent<
+      FilterChange & {
+        filterName?: string;
+      }
+    >
+  ) => {
+    const isChecked = item.detail.isChecked;
+    if (isChecked) {
+      setListOfFilters([...listOfFilters, item.detail.id]);
     } else {
-      const newList = list.filter((id) => id !== e.detail.id);
-      setList(newList);
+      const newList = listOfFilters.filter((i) => i !== item.detail.id);
+      setListOfFilters(newList);
     }
+  };
+
+  const handleSubmitFilter = () => {
+    p.onSubmit(listOfFilters);
+  };
+  const handleResetFilter = () => {
+    p.onReset();
   };
 
   return (
     <>
       <DigiFormFilter
-        onAfChangeFilter={filter}
+        onAfChangeFilter={handleSetFilter}
         afFilterButtonText={p.label}
         afSubmitButtonText={p.buttonText}
         afName={p.legend}
         afListItems={p.listItems}
-        onAfSubmitFilter={p.callback}
+        onAfSubmitFilter={handleSubmitFilter}
+        onAfResetFilter={handleResetFilter}
       />
     </>
   );
