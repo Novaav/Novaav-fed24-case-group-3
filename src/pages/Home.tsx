@@ -1,7 +1,11 @@
+import React from "react";
+import Hero from "../components/Hero";
+
 export const Home = () => {
   return (
     <>
-      <h2>Home page/Hero section</h2>
+      <Hero />
+      {/* Här kan du lägga till fler sektioner senare */}
     </>
   );
 };

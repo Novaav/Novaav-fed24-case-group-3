@@ -1,0 +1,242 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap');
+
+
+
+/* --- Ska läggas in i global.css sen --- */
+body {
+    overflow-x: hidden;  /* Stoppar scroll åt sidan */
+    overflow-y: hidden;  /* Stoppar scroll upp/ner */
+    margin: 0;
+    padding: 0;
+}
+
+/* --- Hero Section --- */
+.hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 80vh;
+    text-align: center;
+    background-color: #ffffff;
+    padding: 0 20px;
+    font-family: 'Open Sans', sans-serif;
+}
+
+/* --- Title --- */
+.hero-title {
+    font-size: 3rem;
+    margin-bottom: 2rem;
+    font-weight: 300;
+    line-height: 1.2;
+    letter-spacing: -0.5px;
+    display: inline-block;
+    color: #222;
+    transform-style: preserve-3d;
+    transition: transform 0.1s ease-out;
+    cursor: grab;
+    user-select: none;
+    -webkit-user-select: none; /* Safari/Mac */
+    -moz-user-select: none;    /* Firefox */
+    -ms-user-select: none;     /* IE/Edge */
+}
+
+/* --- Character Animation --- */
+.hero-char {
+    display: inline-block;
+    opacity: 0;
+    transform: scale(1.2);
+    background: linear-gradient(90deg, #015a8c, #0078b5, #015a8c);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.hero-char.animate-char {
+    animation: fadeInChar 0.8s forwards;
+    animation-delay: calc(var(--i) * 0.1s);
+}
+
+@keyframes fadeInChar {
+    0% {
+        opacity: 0;
+        transform: scale(1.2);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1);
+        background-position: 100% 0%;
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+        background-position: 200% 0%;
+    }
+}
+
+/* --- Search Container --- */
+.search-container {
+    display: flex;
+    width: 50%;
+    max-width: 600px;
+    background: #f5f5f5;
+    border-radius: 999px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    transform: scale(0.95);
+    opacity: 0;
+    transition: transform 1s ease 1.3s, opacity 1s ease 1.3s, background 0.3s ease;
+    position: relative; 
+}
+
+.search-container:hover,
+.search-container:focus-within {
+    background: #e6e6e6;
+}
+
+.search-container.animate-search {
+    transform: scale(1);
+    opacity: 1;
+}
+
+/* --- Search Input --- */
+.search-input {
+    flex: 1;
+    padding: 1rem 1.5rem;
+    border: none;
+    font-size: 1.2rem;
+    outline: none;
+    background: transparent;
+    color: #333;
+    font-family: inherit;
+}
+
+/* --- Search Button --- */
+.search-button {
+    padding: 1rem 1.5rem;
+    background-color: transparent;
+    color: #888;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.search-button:hover {
+    transform: scale(1.1);
+    color: #555;
+}
+
+.search-container:focus-within .search-button {
+    color: #555; 
+}
+
+.search-button:active {
+    transform: scale(1);
+    color: #444;
+}
+/* --- Responsive --- */
+@media (max-width: 768px) {
+    .search-container {
+        width: 80%;
+    }
+
+    .hero-title {
+        font-size: 2rem;
+    }
+}
+
+/* --- Blobs --- */
+.hero .blob {
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    filter: blur(120px);
+    opacity: 0.4;
+    z-index: 0;
+}
+
+/* Blob-positioner och animationer */
+.blob-top-left { top: -250px; left: -250px; background: #42a5f5; animation: moveBlobTopLeft 60s infinite alternate ease-in-out; }
+.blob-top-right { top: -250px; right: -250px; background: #64b5f6; animation: moveBlobTopRight 60s infinite alternate ease-in-out; }
+.blob-bottom-left { bottom: -250px; left: -250px; background: #1976d2; animation: moveBlobBottomLeft 60s infinite alternate ease-in-out; }
+.blob-bottom-right { bottom: -250px; right: -250px; background: #0d47a1; animation: moveBlobBottomRight 60s infinite alternate ease-in-out; }
+
+@keyframes moveBlobTopLeft { 0% { transform: translate(0,0) scale(1); } 100% { transform: translate(80px,80px) scale(1.1); } }
+@keyframes moveBlobTopRight { 0% { transform: translate(0,0) scale(1); } 100% { transform: translate(-80px,60px) scale(1.1); } }
+@keyframes moveBlobBottomLeft { 0% { transform: translate(0,0) scale(1); } 100% { transform: translate(60px,-60px) scale(1.1); } }
+@keyframes moveBlobBottomRight { 0% { transform: translate(0,0) scale(1); } 100% { transform: translate(-70px,-70px) scale(1.1); } }
+
+/* Se till att innehållet ligger ovanpå blobs */
+.hero > *:not(.blob) { position: relative; z-index: 1; }
+
+
+
+/* Dropdown container */
+.dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: transparent; 
+    border-radius: 0 0 24px 24px;
+    max-height: 300px;
+    overflow-y: auto;
+    z-index: 10;
+    list-style: none;
+    padding: 4px 0;
+    margin: 0;
+    opacity: 0;
+    transform: translateY(-10px);
+    animation: dropdownFadeSlide 0.3s forwards;
+}
+
+/* Drop-down items */
+.dropdown li {
+    padding: 14px 20px;
+    cursor: pointer;
+    border-radius: 16px;
+    margin: 4px 12px;
+    background: #f5f5f5;
+    font-size: 1.1rem;
+    transition: background 0.25s ease, transform 0.2s ease;
+    opacity: 0;
+    transform: translateY(-5px);
+    animation: itemFadeIn 0.3s forwards;
+  
+}
+
+/* Staggered animation för items */
+.dropdown li:nth-child(1) { animation-delay: 0.05s; }
+.dropdown li:nth-child(2) { animation-delay: 0.10s; }
+.dropdown li:nth-child(3) { animation-delay: 0.15s; }
+.dropdown li:nth-child(4) { animation-delay: 0.20s; }
+.dropdown li:nth-child(5) { animation-delay: 0.25s; }
+
+/* Hover */
+.dropdown li:hover {
+    background: #e6e6e6; 
+    transform: translateY(-2px);
+}
+
+/* Fade & slide animation för dropdown container */
+@keyframes dropdownFadeSlide {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Fade & slide animation för items */
+@keyframes itemFadeIn {
+    from { opacity: 0; transform: translateY(-5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Scrollbar styling */
+.dropdown::-webkit-scrollbar {
+    width: 6px;
+}
+
+.dropdown::-webkit-scrollbar-thumb {
+    background: rgba(0,0,0,0.1);
+    border-radius: 3px;
+}
