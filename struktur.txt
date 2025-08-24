@@ -1,0 +1,50 @@
+.
+├── cases
+│   ├── Case 1.pdf
+│   └── Case 2.pdf
+├── eslint.config.js
+├── index.html
+├── package-lock.json
+├── package.json
+├── public
+│   └── vite.svg
+├── README.md
+├── src
+│   ├── api
+│   │   └── api.ts
+│   ├── App.tsx
+│   ├── assets
+│   ├── components
+│   │   ├── Footer.tsx
+│   │   ├── Header.tsx
+│   │   └── Hero.tsx
+│   ├── context
+│   │   ├── EducationsContext.tsx
+│   │   ├── GlobalContext.tsx
+│   │   └── JobsContext.tsx
+│   ├── css
+│   │   ├── App.css
+│   │   └── Hero.css
+│   ├── main.tsx
+│   ├── models
+│   │   ├── Education.ts
+│   │   └── Job.ts
+│   ├── pages
+│   │   ├── Educations.tsx
+│   │   ├── Home.tsx
+│   │   ├── Layout.tsx
+│   │   └── NotFound.tsx
+│   ├── reducer
+│   │   ├── educationReducer.ts
+│   │   └── jobsReducer.ts
+│   ├── router
+│   ├── Router.tsx
+│   ├── utils
+│   └── vite-env.d.ts
+├── struktur.txt
+├── tsconfig.app.json
+├── tsconfig.json
+├── tsconfig.node.json
+└── vite.config.ts
+
+14 directories, 34 files
