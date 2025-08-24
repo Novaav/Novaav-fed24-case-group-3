@@ -10,17 +10,15 @@ export const FilterContainer = () => {
   const [paceOfStudy, setPaceOfStudy] = useState<
     { id: string; label: string }[]
   >([]);
-  // const [realData, setRealData] = useState<ApiResponse | null>();
   const { educations, loading, error, fetchEducations } =
     useContext(EducationContext);
 
   const [filterPaceOfStudy, setFilterPaceOfStudy] = useState<string[]>();
   const [filterLocation, setFilterLocation] = useState<string[]>();
 
-  //   detta är funktionen som hittar studietakter utifrån datan vi får från fetchen. behöver datan från context
   const getPaceOfStudies = (data: ResponseData[]) => {
     let paceOfStudyList: { id: string; label: string }[] = [];
-    //startvärde 0 pga kom upp dubliceringar utav procentenheterna
+
     data.forEach((item) => {
       const paceOfStudy = item.eventSummary?.paceOfStudyPercentage?.[0];
       const exist = paceOfStudyList.find(
@@ -49,27 +47,16 @@ export const FilterContainer = () => {
       });
   }, []);
 
-  //   fetch(
-  //     " https://jobed-connect-api.jobtechdev.se/v1/educations?query=förskollärare"
-  //   )
-  //     .then((data) => {
-  //       return data.json();
-  //     })
-  //     .then((data) => {
-  //       getPaceOfStudies(data);
-  //       setRealData(data);
-  //     });
-  // }, []);
-
-  // TODO: vad ska stå i strängen??
+  // TODO: vad ska stå i strängen?? Detta ändras när input skapas för att söka
   useEffect(() => {
-    fetchEducations("förskolelärare");
+    fetchEducations("frontend");
   }, []);
 
-  // test
   useEffect(() => {
-    console.log("Educations i context:", educations);
-  }, []);
+    if (educations.length > 0) {
+      getPaceOfStudies(educations);
+    }
+  }, [educations]);
 
   const filterForPaceOfStudy = (data: ResponseData[]) => {
     if (filterPaceOfStudy && filterPaceOfStudy.length) {
@@ -112,7 +99,6 @@ export const FilterContainer = () => {
   };
 
   const filteredData = filterData(educations);
-  console.log("data som är filtrerad", filteredData);
 
   return (
     <>
