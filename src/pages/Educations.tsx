@@ -27,6 +27,7 @@ export const Educations = () => {
     const filteredData = filterForLocation(filter1, filterLocation);
     return filteredData;
   };
+  // filtrerar på all fetchad data, även när det ändras
   const filteredEducations = filterData();
   return (
     <>
@@ -36,7 +37,7 @@ export const Educations = () => {
           {loading && <p>Laddar...</p>}
           {error && <p>Det gick inte att hämta utbildningar.</p>}
           <ul>
-            {educations.map((e) => (
+            {filteredEducations.map((e) => (
               <EducationCard key={e.id} education={e} />
             ))}
           </ul>

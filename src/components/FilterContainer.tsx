@@ -1,13 +1,7 @@
-import {
-  useContext,
-  useEffect,
-  useState,
-  type Dispatch,
-  type SetStateAction,
-} from "react";
+import { useContext, useEffect, useState } from "react";
 import { SelectFilter } from "./SelectFilter";
-import type { Education, ResponseData } from "../models/Education";
 import { EducationContext } from "../context/EducationsContext";
+import type { ResponseData } from "../models/Education";
 
 export const FilterContainer = () => {
   const [locationData, setLocationData] = useState<
@@ -19,10 +13,10 @@ export const FilterContainer = () => {
   const { educations, setFilterLocation, setFilterPaceOfStudy } =
     useContext(EducationContext);
 
-  const getPaceOfStudies = (data: any) => {
+  const getPaceOfStudies = (data: ResponseData[]) => {
     let paceOfStudyList: { id: string; label: string }[] = [];
 
-    data.forEach((item: any) => {
+    data.forEach((item) => {
       const paceOfStudy = item.eventSummary?.paceOfStudyPercentage?.[0];
       const exist = paceOfStudyList.find(
         (i) => i.id === JSON.stringify(paceOfStudy)
@@ -42,14 +36,13 @@ export const FilterContainer = () => {
       .then((data) => {
         return data.json();
       })
-      .then((data: any) => {
-        const newData = data.map((item: any) => {
+      .then((data: { key: string; value: string }[]) => {
+        const newData = data.map((item) => {
           return { id: item.key, label: item.value };
         });
         setLocationData(newData);
       });
   }, []);
-
   useEffect(() => {
     if (educations.length > 0) {
       getPaceOfStudies(educations);

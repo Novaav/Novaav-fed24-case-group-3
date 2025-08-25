@@ -24,7 +24,7 @@ export const EducationCard = ({ education }: { education: EducationData }) => (
   <li className="education-card">
     <h4>{education.education?.title?.[0]?.content || ""}</h4>
     <p>
-      {education.education?.description?.[0]?.content.slice(0, 60) + "..." ||
+      {education.education?.description?.[0]?.content?.slice(0, 60) + "..." ||
         ""}
     </p>
     <p className="providers">{education.providerSummary?.providers}</p>

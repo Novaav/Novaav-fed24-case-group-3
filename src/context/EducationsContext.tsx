@@ -5,7 +5,7 @@ import {
   type Dispatch,
   type SetStateAction,
 } from "react";
-import type { Education, ResponseData } from "../models/Education";
+import type { ResponseData } from "../models/Education";
 import { educationReducer } from "../reducer/educationReducer";
 import { fetchEducations } from "../api/api";
 
