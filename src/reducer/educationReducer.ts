@@ -3,12 +3,12 @@ import type { Education, ResponseData } from "../models/Education";
 export type educationsState = {
   loading: boolean;
   error: string | null;
-  educations: Education[];
+  educations: ResponseData[];
 };
 
 export type EducationActionType =
   | { type: "FETCH_EDUCATION_REQUEST" }
-  | { type: "FETCH_EDUCATION_SUCCESS"; payload: Education[] }
+  | { type: "FETCH_EDUCATION_SUCCESS"; payload: ResponseData[] }
   | { type: "FETCH_EDUCATION_FAILURE"; payload: string };
 
 export const educationReducer = (
