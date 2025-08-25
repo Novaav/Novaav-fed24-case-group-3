@@ -7,7 +7,7 @@ export const Header = () => {
   return (
     <DigiHeader
       afSystemName="Vår app..."
-      afHideSystemName={true}
+      afHideSystemName={false}
       afMenuButtonText="Meny"
     >
       <a slot="header-logo" aria-label="Designsystemets startsida" href="/" />
