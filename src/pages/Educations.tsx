@@ -1,6 +1,7 @@
 import { useSearchParams } from "react-router";
 import { useContext, useEffect } from "react";
 import { EducationContext } from "../context/EducationsContext";
+import { Description } from "../components/Description";
 
 export const Educations = () => {
   const [searchParams] = useSearchParams();
@@ -14,7 +15,7 @@ export const Educations = () => {
 
   return (
     <>
-      <h1>Utbildningar</h1>
+      {/* <h1>Utbildningar</h1>
       <p>Sökresultat för: {query}</p>
       {loading && <p>Laddar...</p>}
       {error && <p>Det gick inte att hämta utbildningar.</p>}
@@ -22,7 +23,8 @@ export const Educations = () => {
         {educations.map((e) => (
           <li key={e.id}>{e.education?.title?.[0]?.content || ""}</li>
         ))}
-      </ul>
+      </ul> */}
+      <Description />
     </>
   );
 };
