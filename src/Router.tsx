@@ -18,6 +18,20 @@ export const router = createBrowserRouter([
       {
         path: "/educations",
         element: <Educations />,
+        children: [
+          // innan en användare väljer ett utbildningskort visas uppmuntran att välja ett kort för att se en detalierad baskrivning
+          { index: true, element: <EmptyEducationView /> },
+
+          {
+            // /educations/:id
+            path: ":educationId",
+            element: <EducationDetail />, // Utbildningsbeskrivning
+            children: [
+              { path: "jobs", element: <JobsCards /> },
+              { path: "jobs/:jobId", element: <JobDetail /> },
+            ],
+          },
+        ],
       },
     ],
   },
