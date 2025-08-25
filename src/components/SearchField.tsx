@@ -1,40 +1,53 @@
 import {
-  FormInputVariation,
+  FormInputSearchVariation,
   FormInputType,
-  FormInputValidation,
-  FormInputMode,
 } from "@digi/arbetsformedlingen";
-import { DigiFormInput } from "@digi/arbetsformedlingen-react";
-import type { Dispatch, SetStateAction } from "react";
+import { DigiFormInputSearch } from "@digi/arbetsformedlingen-react";
+import { useNavigate, useLocation } from "react-router";
 import "../css/searchField.css";
 
 interface SearchFieldProps {
   searchText: string;
-  setSearchText: Dispatch<SetStateAction<string>>;
-  onSearch: (query: string) => void;
+  setSearchText: (val: string) => void;
 }
 
-export const SearchField = (p: SearchFieldProps) => {
-  // typningshsit från af
-  // const handleInput = (e: CustomEvent<HTMLDigiFormInputElement>) =>
-  //   p.setSearchText(e.detail.value.toString());
-  const handleInput = (e: CustomEvent<HTMLDigiFormInputElement>) => {
-    const value = e.detail.value.toString();
-    p.setSearchText(value);
-    p.onSearch(value);
+export const SearchField = ({
+  searchText,
+  setSearchText,
+}: SearchFieldProps) => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const handleChange = (e: any) => {
+    const value = (e.target as HTMLInputElement)?.value ?? "";
+    setSearchText(value);
+  };
+
+  const handleSearch = (e?: React.FormEvent) => {
+    if (e) e.preventDefault();
+    if (!(searchText ?? "").trim()) return;
+
+    const targetUrl = `/educations?query=${encodeURIComponent(
+      (searchText ?? "").trim()
+    )}`;
+    if (location.pathname === "/educations") {
+      navigate(targetUrl, { replace: true });
+    } else {
+      navigate(targetUrl);
+    }
   };
 
   return (
-    <>
-      <DigiFormInput
-        af-label="Etikett"
-        afVariation={FormInputVariation.MEDIUM}
-        afType={FormInputType.TEXT}
-        afValidation={FormInputValidation.NEUTRAL}
-        afInputmode={FormInputMode.TEXT}
-        onAfOnChange={handleInput}
-        className="DigiFormInput"
-      ></DigiFormInput>
-    </>
+    <form onSubmit={handleSearch}>
+      <DigiFormInputSearch
+        afLabel="Sök utbildning..."
+        afVariation={FormInputSearchVariation.MEDIUM}
+        afType={FormInputType.SEARCH}
+        afButtonText="Sök"
+        value={searchText}
+        onAfOnChange={handleChange} // ⚡ här använder vi e.target.value istället för e.detail.value
+        className="DigiFormInputSearch"
+      />
+    </form>
   );
 };

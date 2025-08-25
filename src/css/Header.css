@@ -2,3 +2,34 @@ header {
   position: relative;
   z-index: 100;
 }
+
+/*  Digi-header resets ...  */
+
+.digi-logo__img {
+  display: none !important;
+}
+
+.digi-logo__system-name {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.sc-digi-logo-h .digi-logo__system-name.sc-digi-logo::before {
+  display: none !important;
+}
+
+.digi-form-input__label {
+  display: none !important;
+}
+
+.digi-form-input {
+  gap: 0 !important;
+}
+
+.sc-digi-header .sc-digi-layout-block {
+  gap: 1rem;
+}
+
+form .sc-digi-header .sc-digi-layout-block {
+  gap: 0;
+}

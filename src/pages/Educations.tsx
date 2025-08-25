@@ -10,7 +10,7 @@ export const Educations = () => {
 
   useEffect(() => {
     fetchEducations(query);
-  }, []);
+  }, [query]);
 
   return (
     <>
