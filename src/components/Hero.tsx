@@ -39,7 +39,8 @@ const Hero: React.FC = () => {
     const handleMouseDown = () => (isMouseDown.current = true);
     const handleMouseUp = () => {
       isMouseDown.current = false;
-      titleEl.style.transform = "perspective(600px) rotateX(0deg) rotateY(0deg)";
+      titleEl.style.transform =
+        "perspective(600px) rotateX(0deg) rotateY(0deg)";
     };
     const handleMouseMove = (e: MouseEvent) => {
       if (!isMouseDown.current) return;
@@ -73,10 +74,12 @@ const Hero: React.FC = () => {
     const timer = setTimeout(async () => {
       try {
         const data = await fetchEducations(query);
-        const mapped: Education[] = (data as EducationApiItem[]).slice(0, 5).map(item => ({
-          id: item.education.identifier,
-          title: item.education.title?.[0]?.content ?? "Ingen titel",
-        }));
+        const mapped: Education[] = (data as EducationApiItem[])
+          .slice(0, 5)
+          .map((item) => ({
+            id: item.education.identifier,
+            title: item.education.title?.[0]?.content ?? "Ingen titel",
+          }));
         setResults(mapped);
         setShowDropdown(mapped.length > 0);
       } catch (err) {
@@ -121,7 +124,9 @@ const Hero: React.FC = () => {
         )}
       </h1>
 
-      <div className={`search-container ${animateSearch ? "animate-search" : ""}`}>
+      <div
+        className={`search-container ${animateSearch ? "animate-search" : ""}`}
+      >
         <input
           type="text"
           placeholder="Sök utbildning..."

@@ -2,6 +2,7 @@ import { DigiHeader } from "@digi/arbetsformedlingen-react";
 import { SearchField } from "./SearchField";
 import { FilterContainer } from "./FilterContainer";
 import "../css/searchField.css";
+import "../css/Header.css";
 
 export const Header = () => {
   return (
