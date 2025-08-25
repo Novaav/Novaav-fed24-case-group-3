@@ -10,3 +10,13 @@ export interface Education {
   distance?: boolean; // Om utbildningen är på distans
   executions?: { start: string; end: string }[]; // Start- och slutdatum för utbildningen
 }
+
+interface EventSummary {
+  paceOfStudyPercentage?: number[]; //Studietakt
+  regionCode?: string[]; //områdes kod
+}
+
+export interface ResponseData {
+  education?: Education;
+  eventSummary?: EventSummary;
+}

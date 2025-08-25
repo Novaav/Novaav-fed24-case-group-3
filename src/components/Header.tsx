@@ -1,9 +1,20 @@
+import { DigiHeader } from "@digi/arbetsformedlingen-react";
+import { SearchField } from "./SearchField";
+import { FilterContainer } from "./FilterContainer";
+import "../css/searchField.css";
+
 export const Header = () => {
   return (
-    <>
-      <header>
-        <h2>Header Logo</h2>
-      </header>
-    </>
+    <DigiHeader
+      afSystemName="Vår app..."
+      afHideSystemName={false}
+      afMenuButtonText="Meny"
+    >
+      <a slot="header-logo" aria-label="Startsida" href="/" />
+      <div slot="header-content">
+        <SearchField />
+        <FilterContainer />
+      </div>
+    </DigiHeader>
   );
 };

@@ -1,2 +1,35 @@
 @import "@digi/arbetsformedlingen/dist/digi-arbetsformedlingen/digi-arbetsformedlingen.css";
 @import "@digi/arbetsformedlingen/dist/digi-arbetsformedlingen/fonts/src/fonts.css";
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/*  Digi-header resets ...  */
+
+.digi-logo__img {
+  display: none !important;
+}
+
+.digi-logo__system-name {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.sc-digi-logo-h .digi-logo__system-name.sc-digi-logo::before {
+  display: none !important;
+}
+
+.digi-form-input__label {
+  display: none !important;
+}
+
+.digi-form-input {
+  gap: 0 !important;
+}
+
+.sc-digi-header .sc-digi-layout-block {
+  gap: 1rem;
+}

@@ -1,10 +1,10 @@
 import { createContext, useReducer } from "react";
-import type { Education } from "../models/Education";
+import type { ResponseData } from "../models/Education";
 import { educationReducer } from "../reducer/educationReducer";
 import { fetchEducations } from "../api/api";
 
 export interface IEducationContext {
-  educations: Education[];
+  educations: ResponseData[];
   loading: boolean;
   error: string | null;
   fetchEducations: (query: string) => Promise<void>;
