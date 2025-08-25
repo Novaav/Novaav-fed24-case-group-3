@@ -15,6 +15,9 @@ interface EducationData {
   providerSummary?: {
     providers: string[];
   };
+  eventSummary?: {
+    paceOfStudyPercentage?: number[];
+  };
 }
 
 export const EducationCard = ({ education }: { education: EducationData }) => (
@@ -24,6 +27,7 @@ export const EducationCard = ({ education }: { education: EducationData }) => (
       {education.education?.description?.[0]?.content.slice(0, 60) + "..." ||
         ""}
     </p>
-    <p>{education.providerSummary?.providers}</p>
+    <p className="providers">{education.providerSummary?.providers}</p>
+    <p>{education.eventSummary?.paceOfStudyPercentage}%</p>
   </li>
 );
