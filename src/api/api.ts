@@ -1,4 +1,4 @@
-import type { ResponseData } from "../models/Education";
+import type { Education, ResponseData } from "../models/Education";
 import type { Job } from "../models/Job";
 
 export const fetchJobs = async (query: string): Promise<Job[]> => {
@@ -12,9 +12,7 @@ export const fetchJobs = async (query: string): Promise<Job[]> => {
   return data.hits as Job[];
 };
 
-export const fetchEducations = async (
-  query: string
-): Promise<ResponseData[]> => {
+export const fetchEducations = async (query: string): Promise<Education[]> => {
   const res = await fetch(
     `https://jobed-connect-api.jobtechdev.se/v1/educations?query=${query}`
   );
@@ -22,5 +20,5 @@ export const fetchEducations = async (
     throw new Error("Failed to fetch educations");
   }
   const data = await res.json();
-  return data.result as ResponseData[];
+  return data.result as Education[];
 };

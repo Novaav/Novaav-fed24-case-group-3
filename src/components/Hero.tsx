@@ -73,13 +73,8 @@ const Hero: React.FC = () => {
 
     const timer = setTimeout(async () => {
       try {
-        const data = await fetchEducations(query);
-        const mapped: Education[] = (data as EducationApiItem[])
-          .slice(0, 5)
-          .map((item) => ({
-            id: item.education.identifier,
-            title: item.education.title?.[0]?.content ?? "Ingen titel",
-          }));
+        const data = await fetchEducations(query); // data: Education[]
+        const mapped = data.slice(0, 5); // Visa bara de första 5
         setResults(mapped);
         setShowDropdown(mapped.length > 0);
       } catch (err) {
@@ -149,7 +144,7 @@ const Hero: React.FC = () => {
           <ul className="dropdown">
             {results.map((edu) => (
               <li key={edu.id} onMouseDown={() => handleSelect(edu)}>
-                <strong>{edu.title}</strong>
+                <strong>{edu.education?.title?.[0]?.content}</strong>
               </li>
             ))}
           </ul>

@@ -48,9 +48,9 @@ export const FilterContainer = () => {
   }, []);
 
   // TODO: vad ska stå i strängen?? Detta ändras när input skapas för att söka
-  useEffect(() => {
+  /*useEffect(() => {
     fetchEducations("frontend");
-  }, []);
+  }, []);*/
 
   useEffect(() => {
     if (educations.length > 0) {
