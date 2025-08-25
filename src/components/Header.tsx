@@ -10,7 +10,7 @@ export const Header = () => {
       afHideSystemName={false}
       afMenuButtonText="Meny"
     >
-      <a slot="header-logo" aria-label="Designsystemets startsida" href="/" />
+      <a slot="header-logo" aria-label="Startsida" href="/" />
       <div slot="header-content">
         <SearchField />
         <FilterContainer />
