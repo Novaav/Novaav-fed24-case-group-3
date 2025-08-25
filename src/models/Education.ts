@@ -1,22 +1,67 @@
-export interface Education {
-  id: string; // Unikt id för utbildningen
-  code?: string; // Programkod, t.ex. "YH00794"
-  title?: { lang: string; content: string }[]; // Utbildningens titel
-  description?: string; // Beskrivning av utbildningen
-  providers?: string[]; // Lista med utbildningsanordnare
-  credits?: number; // Antal poäng (t.ex. 400)
-  educationLevelCode?: string; // Utbildningsnivå, t.ex. "ISCED_5B"
-  formCode?: string; // Form, t.ex. "yrkeshögskoleutbildning"
-  distance?: boolean; // Om utbildningen är på distans
-  executions?: { start: string; end: string }[]; // Start- och slutdatum för utbildningen
+export interface LocalizedText {
+  lang: string;
+  content: string;
 }
 
-interface EventSummary {
-  paceOfStudyPercentage?: number[]; //Studietakt
-  regionCode?: string[]; //områdes kod
+export interface CodeType {
+  code: string;
+  type: string;
+}
+
+export interface Subject {
+  code: string;
+  name?: string;
+  type: string;
+}
+
+export interface Credits {
+  system: CodeType;
+  credits: number;
+}
+
+export interface Education {
+  identifier: string;
+  resultIsDegree: boolean;
+  expires?: string;
+  recommendedPriorKnowledge?: LocalizedText[];
+  code?: string;
+  configuration?: CodeType;
+  subject?: Subject[];
+  description?: LocalizedText[];
+  lastEdited?: string;
+  title?: LocalizedText[];
+  isVocational?: boolean | null;
+  urls?: string[];
+  form?: CodeType;
+  credits?: Credits;
+  educationLevel?: CodeType;
+  eligibleForStudentAid?: CodeType;
+}
+
+export interface ProviderSummary {
+  providers: string[];
+}
+
+export interface Execution {
+  start: string;
+  end: string;
+}
+
+export interface EventSummary {
+  regionCode?: string[];
+  paceOfStudyPercentage?: number[];
+  tuitionFee?: string[];
+  executions?: Execution[];
+  languageOfInstruction?: string[];
+  distance?: boolean;
+  timeOfStudy?: string[];
+  municipalityCode?: string[];
+  onlyAsPartOfProgram?: string[];
 }
 
 export interface ResponseData {
+  id: string;
   education?: Education;
+  providerSummary?: ProviderSummary;
   eventSummary?: EventSummary;
 }

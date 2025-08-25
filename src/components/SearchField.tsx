@@ -45,7 +45,7 @@ export const SearchField = ({
         afType={FormInputType.SEARCH}
         afButtonText="Sök"
         value={searchText}
-        onAfOnChange={handleChange} // ⚡ här använder vi e.target.value istället för e.detail.value
+        onAfOnChange={handleChange}
         className="DigiFormInputSearch"
       />
     </form>

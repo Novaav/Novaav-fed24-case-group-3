@@ -5,12 +5,12 @@ import {
   type Dispatch,
   type SetStateAction,
 } from "react";
-import type { Education } from "../models/Education";
+import type { Education, ResponseData } from "../models/Education";
 import { educationReducer } from "../reducer/educationReducer";
 import { fetchEducations } from "../api/api";
 
 export interface IEducationContext {
-  educations: Education[];
+  educations: ResponseData[];
   loading: boolean;
   error: string | null;
   fetchEducations: (query: string) => Promise<void>;
@@ -46,8 +46,9 @@ export const EducationContextProvider = ({
 
   const fetchEducationsHandler = async (query: string) => {
     dispatch({ type: "FETCH_EDUCATION_REQUEST" });
+
     try {
-      const educations = await fetchEducations(query);
+      const educations: ResponseData[] = await fetchEducations(query);
       dispatch({ type: "FETCH_EDUCATION_SUCCESS", payload: educations });
     } catch (error) {
       const message = error instanceof Error ? error.message : "Unknown error";
