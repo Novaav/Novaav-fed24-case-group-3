@@ -3,7 +3,8 @@ import { SearchField } from "./SearchField";
 import { FilterContainer } from "./FilterContainer";
 import "../css/searchField.css";
 import "../css/Header.css";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { EducationContext } from "../context/EducationsContext";
 
 export const Header = () => {
   const [searchText, setSearchText] = useState("");
