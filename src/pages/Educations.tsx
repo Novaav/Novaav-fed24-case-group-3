@@ -20,7 +20,6 @@ export const Educations = () => {
   useEffect(() => {
     fetchEducations(query);
   }, [query]);
-  console.log(educations);
 
   const filterData = () => {
     const filter1 = filterForPaceOfStudy(educations, filterPaceOfStudy);
