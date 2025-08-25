@@ -7,19 +7,11 @@ import {
   DigiTypography,
   DigiTypographyMeta,
 } from "@digi/arbetsformedlingen-react";
-import { useContext, useEffect } from "react";
-import { EducationContext } from "../context/EducationsContext";
-// kommer behöva en prop för education
-export const Description = () => {
-  const { educations, fetchEducations } = useContext(EducationContext);
-
-  useEffect(() => {
-    fetchEducations("förskollärare");
-  }, []);
-
-  const education = educations[0];
-  console.log("HÄÄÄR", education);
-
+import type { ResponseData } from "../models/Education";
+interface DescriptionProps {
+  education?: ResponseData;
+}
+export const Description = ({ education }: DescriptionProps) => {
   const titles = education?.education?.title ?? null;
   const findedTitle = titles?.find((i) => i.lang === "swe");
   const title = findedTitle?.content;
