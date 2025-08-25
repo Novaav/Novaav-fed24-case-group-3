@@ -118,8 +118,8 @@ export const FilterContainer = () => {
         onReset={() => setFilterPaceOfStudy([])}
         onSubmit={(list: string[]) => setFilterPaceOfStudy(list)}
       />
-      {filteredData &&
-        filteredData.map((p, i) => <p key={i}>{p.education?.code}</p>)}
+      {/* {filteredData &&
+        filteredData.map((p, i) => <p key={i}>{p.education?.code}</p>)} */}
     </>
   );
 };
