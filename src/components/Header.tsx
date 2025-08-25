@@ -1,52 +1,20 @@
-import {
-  ButtonSize,
-  ButtonVariation,
-  LayoutColumnsElement,
-} from "@digi/arbetsformedlingen";
-import {
-  DigiButton,
-  DigiIconCopy,
-  DigiLayoutColumns,
-  type DigiMediaImage,
-} from "@digi/arbetsformedlingen-react";
-import { FilterContainer } from "./FilterContainer";
+import { DigiHeader } from "@digi/arbetsformedlingen-react";
 import { SearchField } from "./SearchField";
+import { FilterContainer } from "./FilterContainer";
 import "../css/searchField.css";
 
 export const Header = () => {
   return (
-    <>
-      <DigiLayoutColumns
-        afElement={LayoutColumnsElement.DIV}
-        // className="LayoutColumn"
-      >
-        <h2>Header Logo</h2>
-        <SearchField
-          searchText=""
-          setSearchText={() => {}}
-          onSearch={() => {}}
-        />
+    <DigiHeader
+      afSystemName="Vår app..."
+      afHideSystemName={true}
+      afMenuButtonText="Meny"
+    >
+      <a slot="header-logo" aria-label="Designsystemets startsida" href="/" />
+      <div slot="header-content">
+        <SearchField />
         <FilterContainer />
-        <DigiButton
-          // afSize={ButtonSize.small}
-          afVariation={ButtonVariation.SECONDARY}
-          afFullWidth={false}
-          af-size="small"
-          af-variation="primary"
-          af-full-width="false"
-          af-padding="25px"
-        >
-          <DigiIconCopy slot="icon" />
-          Sök
-        </DigiButton>
-        <digi-button
-          af-size="small"
-          af-variation="primary"
-          af-full-width="false"
-        >
-          Primär knapp
-        </digi-button>
-      </DigiLayoutColumns>
-    </>
+      </div>
+    </DigiHeader>
   );
 };
