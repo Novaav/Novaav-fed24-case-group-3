@@ -1,7 +1,6 @@
 import type {
   DigiFormFilterCustomEvent,
   FilterChange,
-  FormFilterState,
 } from "@digi/arbetsformedlingen";
 import { DigiFormFilter } from "@digi/arbetsformedlingen-react";
 import { useState } from "react";

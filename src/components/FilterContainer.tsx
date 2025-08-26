@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { SelectFilter } from "./SelectFilter";
-import type { ResponseData } from "../models/Education";
 import { EducationContext } from "../context/EducationsContext";
+import type { ResponseData } from "../models/Education";
 
 export const FilterContainer = () => {
   const [locationData, setLocationData] = useState<
@@ -10,11 +10,8 @@ export const FilterContainer = () => {
   const [paceOfStudy, setPaceOfStudy] = useState<
     { id: string; label: string }[]
   >([]);
-  const { educations, loading, error, fetchEducations } =
+  const { educations, setFilterLocation, setFilterPaceOfStudy } =
     useContext(EducationContext);
-
-  const [filterPaceOfStudy, setFilterPaceOfStudy] = useState<string[]>();
-  const [filterLocation, setFilterLocation] = useState<string[]>();
 
   const getPaceOfStudies = (data: ResponseData[]) => {
     let paceOfStudyList: { id: string; label: string }[] = [];
@@ -39,66 +36,18 @@ export const FilterContainer = () => {
       .then((data) => {
         return data.json();
       })
-      .then((data) => {
+      .then((data: { key: string; value: string }[]) => {
         const newData = data.map((item) => {
           return { id: item.key, label: item.value };
         });
         setLocationData(newData);
       });
   }, []);
-
-  // TODO: vad ska stå i strängen?? Detta ändras när input skapas för att söka
-  /*useEffect(() => {
-    fetchEducations("frontend");
-  }, []);*/
-
   useEffect(() => {
     if (educations.length > 0) {
       getPaceOfStudies(educations);
     }
   }, [educations]);
-
-  const filterForPaceOfStudy = (data: ResponseData[]) => {
-    if (filterPaceOfStudy && filterPaceOfStudy.length) {
-      const filteredData = data.filter((item) => {
-        const percentage = item.eventSummary?.paceOfStudyPercentage?.[0];
-        const exist = filterPaceOfStudy?.find((i) => Number(i) === percentage);
-        if (exist) {
-          return item;
-        }
-      });
-      return filteredData;
-    } else {
-      return data;
-    }
-  };
-
-  const filterForLocation = (data: ResponseData[]) => {
-    if (filterLocation && filterLocation.length) {
-      const filteredData = data.filter((item /**TODO: fix typing */) => {
-        const locations = item.eventSummary?.regionCode;
-        let existing = false;
-        filterLocation?.forEach((i) => {
-          const exist = locations?.find((item: string) => item === i);
-          if (exist) {
-            existing = true;
-          }
-        });
-        if (existing) return item;
-      });
-      return filteredData;
-    } else {
-      return data;
-    }
-  };
-
-  const filterData = (data: ResponseData[]) => {
-    const filter1 = filterForPaceOfStudy(data);
-    const filteredData = filterForLocation(filter1);
-    return filteredData;
-  };
-
-  const filteredData = filterData(educations);
 
   return (
     <>
@@ -118,8 +67,6 @@ export const FilterContainer = () => {
         onReset={() => setFilterPaceOfStudy([])}
         onSubmit={(list: string[]) => setFilterPaceOfStudy(list)}
       />
-      {/* {filteredData &&
-        filteredData.map((p, i) => <p key={i}>{p.education?.code}</p>)} */}
     </>
   );
 };

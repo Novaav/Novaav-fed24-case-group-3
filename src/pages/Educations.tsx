@@ -1,19 +1,33 @@
 import { useSearchParams } from "react-router";
 import { useContext, useEffect } from "react";
 import { EducationContext } from "../context/EducationsContext";
+import { filterForLocation, filterForPaceOfStudy } from "../utils/Filter";
 import "../css/educations.css";
 import { EducationCard } from "../components/EducationCard";
 
 export const Educations = () => {
   const [searchParams] = useSearchParams();
   const query = searchParams.get("query") || "";
-  const { fetchEducations, educations, loading, error } =
-    useContext(EducationContext);
+  const {
+    fetchEducations,
+    educations,
+    loading,
+    error,
+    filterLocation,
+    filterPaceOfStudy,
+  } = useContext(EducationContext);
 
   useEffect(() => {
     fetchEducations(query);
   }, [query]);
 
+  const filterData = () => {
+    const filter1 = filterForPaceOfStudy(educations, filterPaceOfStudy);
+    const filteredData = filterForLocation(filter1, filterLocation);
+    return filteredData;
+  };
+  // filtrerar på all fetchad data, även när det ändras
+  const filteredEducations = filterData();
   return (
     <>
       <div className="columns">
@@ -22,7 +36,7 @@ export const Educations = () => {
           {loading && <p>Laddar...</p>}
           {error && <p>Det gick inte att hämta utbildningar.</p>}
           <ul>
-            {educations.map((e) => (
+            {filteredEducations.map((e) => (
               <EducationCard key={e.id} education={e} />
             ))}
           </ul>
