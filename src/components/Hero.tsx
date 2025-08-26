@@ -1,8 +1,9 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useCallback } from "react";
 import "../css/Hero.css";
 import { fetchEducations } from "../api/api";
 import type { Education } from "../models/Education";
 import { useNavigate } from "react-router";
+import { DigiFormInputSearch } from "@digi/arbetsformedlingen-react";
 
 interface EducationApiItem {
   education: {
@@ -17,12 +18,12 @@ const Hero: React.FC = () => {
   const [animateSearch, setAnimateSearch] = useState(false);
   const [query, setQuery] = useState("");
   const [results, setResults] = useState<Education[]>([]);
-  const [showDropdown, setShowDropdown] = useState(false);
   const titleRef = useRef<HTMLHeadingElement>(null);
   const isMouseDown = useRef(false);
   const navigate = useNavigate();
 
-  // Start-animation
+  const showDropdown = results.length > 0;
+
   useEffect(() => {
     const timeout = setTimeout(() => {
       setAnimateText(true);
@@ -31,7 +32,7 @@ const Hero: React.FC = () => {
     return () => clearTimeout(timeout);
   }, []);
 
-  // Mouse drag-rotation
+  // Mouse drag 3D effect
   useEffect(() => {
     const titleEl = titleRef.current;
     if (!titleEl) return;
@@ -41,6 +42,7 @@ const Hero: React.FC = () => {
       isMouseDown.current = false;
       titleEl.style.transform =
         "perspective(600px) rotateX(0deg) rotateY(0deg)";
+      titleEl.style.textShadow = "";
     };
     const handleMouseMove = (e: MouseEvent) => {
       if (!isMouseDown.current) return;
@@ -49,7 +51,11 @@ const Hero: React.FC = () => {
       const y = e.clientY - (rect.top + rect.height / 2);
       const rotateX = (-y / rect.height) * 5;
       const rotateY = (x / rect.width) * 5;
+
       titleEl.style.transform = `perspective(600px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+      const shadowX = rotateY * 2;
+      const shadowY = rotateX * 2;
+      titleEl.style.textShadow = `${shadowX}px ${shadowY}px 10px rgba(0,0,0,0.25)`;
     };
 
     titleEl.addEventListener("mousedown", handleMouseDown);
@@ -64,30 +70,31 @@ const Hero: React.FC = () => {
   }, []);
 
   // Debounced live search
-  useEffect(() => {
-    if (!query) {
+  const performSearch = useCallback(async (searchQuery: string) => {
+    if (!searchQuery) {
       setResults([]);
-      setShowDropdown(false);
       return;
     }
+    try {
+      const data = await fetchEducations(searchQuery);
+      const mapped: Education[] = (data as EducationApiItem[])
+        .slice(0, 5)
+        .map((item) => ({
+          id: item.education.identifier,
+          title: item.education.title?.[0]?.content ?? "Ingen titel",
+        }));
+      setResults(mapped);
+    } catch {
+      setResults([]);
+    }
+  }, []);
 
-    const timer = setTimeout(async () => {
-      try {
-        const data = await fetchEducations(query); // data: Education[]
-        const mapped = data.slice(0, 5); // Visa bara de första 5
-        setResults(mapped);
-        setShowDropdown(mapped.length > 0);
-      } catch (err) {
-        setResults([]);
-        setShowDropdown(false);
-      }
-    }, 300);
-
-    return () => clearTimeout(timer);
-  }, [query]);
+  useEffect(() => {
+    const handler = setTimeout(() => performSearch(query), 300);
+    return () => clearTimeout(handler);
+  }, [query, performSearch]);
 
   const handleSelect = (edu: Education) => {
-    setShowDropdown(false);
     navigate(`/educations?selected=${edu.id}`);
   };
 
@@ -122,29 +129,33 @@ const Hero: React.FC = () => {
       <div
         className={`search-container ${animateSearch ? "animate-search" : ""}`}
       >
-        <input
-          type="text"
-          placeholder="Sök utbildning..."
-          className="search-input"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          onFocus={() => results.length > 0 && setShowDropdown(true)}
-          onBlur={() => setTimeout(() => setShowDropdown(false), 150)}
-          onKeyDown={(e) => e.key === "Enter" && handleSearchSubmit()}
-        />
-        <button
-          type="button"
-          className="search-button"
-          onClick={handleSearchSubmit}
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleSearchSubmit();
+          }}
         >
-          🔍
-        </button>
+          <DigiFormInputSearch
+            value={query}
+            onInput={(e: React.ChangeEvent<HTMLInputElement>) =>
+              setQuery(e.target.value)
+            }
+            placeholder="Sök utbildning eller jobb..."
+            onFocus={() => {}}
+            onBlur={() => {}}
+            afButtonText="Sök"
+          />
+        </form>
 
-        {showDropdown && results.length > 0 && (
+        {showDropdown && (
           <ul className="dropdown">
-            {results.map((edu) => (
-              <li key={edu.id} onMouseDown={() => handleSelect(edu)}>
-                <strong>{edu.education?.title?.[0]?.content}</strong>
+            {results.map((edu, index) => (
+              <li
+                key={edu.id}
+                onMouseDown={() => handleSelect(edu)}
+                style={{ animationDelay: `${0.05 + index * 0.05}s` }}
+              >
+                <strong>{edu.title}</strong>
               </li>
             ))}
           </ul>
