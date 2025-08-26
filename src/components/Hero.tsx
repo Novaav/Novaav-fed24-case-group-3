@@ -40,7 +40,8 @@ const Hero: React.FC = () => {
     const handleMouseDown = () => (isMouseDown.current = true);
     const handleMouseUp = () => {
       isMouseDown.current = false;
-      titleEl.style.transform = "perspective(600px) rotateX(0deg) rotateY(0deg)";
+      titleEl.style.transform =
+        "perspective(600px) rotateX(0deg) rotateY(0deg)";
       titleEl.style.textShadow = "";
     };
     const handleMouseMove = (e: MouseEvent) => {
@@ -78,7 +79,7 @@ const Hero: React.FC = () => {
       const data = await fetchEducations(searchQuery);
       const mapped: Education[] = (data as EducationApiItem[])
         .slice(0, 5)
-        .map(item => ({
+        .map((item) => ({
           id: item.education.identifier,
           title: item.education.title?.[0]?.content ?? "Ingen titel",
         }));
@@ -125,7 +126,9 @@ const Hero: React.FC = () => {
         )}
       </h1>
 
-      <div className={`search-container ${animateSearch ? "animate-search" : ""}`}>
+      <div
+        className={`search-container ${animateSearch ? "animate-search" : ""}`}
+      >
         <form
           onSubmit={(e) => {
             e.preventDefault();
@@ -134,12 +137,14 @@ const Hero: React.FC = () => {
         >
           <DigiFormInputSearch
             value={query}
-            onInput={(e: React.ChangeEvent<HTMLInputElement>) => setQuery(e.target.value)}
+            onInput={(e: React.ChangeEvent<HTMLInputElement>) =>
+              setQuery(e.target.value)
+            }
             placeholder="Sök utbildning eller jobb..."
             onFocus={() => {}}
             onBlur={() => {}}
+            afButtonText="Sök"
           />
-          <button type="submit" style={{ display: "none" }} />
         </form>
 
         {showDropdown && (
