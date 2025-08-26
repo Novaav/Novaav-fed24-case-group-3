@@ -40,7 +40,7 @@ export const Educations = () => {
           {loading && <p>Laddar...</p>}
           {error && <p>Det gick inte att hämta utbildningar.</p>}
           <ul>
-            {educations.map((education) => (
+            {filteredEducations.map((education) => (
               <EducationCard
                 key={education.id}
                 education={education}
