@@ -4,6 +4,7 @@ import { fetchEducations } from "../api/api";
 import type { Education } from "../models/Education";
 import { useNavigate } from "react-router";
 import { DigiFormInputSearch } from "@digi/arbetsformedlingen-react";
+import { setupTitle3DEffect } from "../utils/Title3DEffect";
 
 interface EducationApiItem {
   education: {
@@ -32,41 +33,12 @@ const Hero: React.FC = () => {
     return () => clearTimeout(timeout);
   }, []);
 
-  // Mouse drag 3D effect
+  // Mouse drag 3D effect - la logiken i setupTitle3DEffect.ts i mappen utils
   useEffect(() => {
     const titleEl = titleRef.current;
     if (!titleEl) return;
-
-    const handleMouseDown = () => (isMouseDown.current = true);
-    const handleMouseUp = () => {
-      isMouseDown.current = false;
-      titleEl.style.transform =
-        "perspective(600px) rotateX(0deg) rotateY(0deg)";
-      titleEl.style.textShadow = "";
-    };
-    const handleMouseMove = (e: MouseEvent) => {
-      if (!isMouseDown.current) return;
-      const rect = titleEl.getBoundingClientRect();
-      const x = e.clientX - (rect.left + rect.width / 2);
-      const y = e.clientY - (rect.top + rect.height / 2);
-      const rotateX = (-y / rect.height) * 5;
-      const rotateY = (x / rect.width) * 5;
-
-      titleEl.style.transform = `perspective(600px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-      const shadowX = rotateY * 2;
-      const shadowY = rotateX * 2;
-      titleEl.style.textShadow = `${shadowX}px ${shadowY}px 10px rgba(0,0,0,0.25)`;
-    };
-
-    titleEl.addEventListener("mousedown", handleMouseDown);
-    window.addEventListener("mouseup", handleMouseUp);
-    window.addEventListener("mousemove", handleMouseMove);
-
-    return () => {
-      titleEl.removeEventListener("mousedown", handleMouseDown);
-      window.removeEventListener("mouseup", handleMouseUp);
-      window.removeEventListener("mousemove", handleMouseMove);
-    };
+    const headingAnimation = setupTitle3DEffect(titleEl, isMouseDown);
+    return headingAnimation;
   }, []);
 
   // Debounced live search
