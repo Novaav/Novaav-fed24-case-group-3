@@ -1,0 +1,18 @@
+/* LAYOUT */
+
+.columns {
+  display: flex;
+  height: 80vh;
+}
+
+/* SIDEBAR */
+.sidebar {
+  width: 30%;
+  padding: 1rem;
+  overflow-y: auto;
+}
+/* CONTENT */
+.main-content {
+  flex-grow: 1;
+  padding: 1rem;
+}
