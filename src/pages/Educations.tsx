@@ -1,6 +1,7 @@
 import { useSearchParams } from "react-router";
 import { useContext, useEffect, useState } from "react";
 import { EducationContext } from "../context/EducationsContext";
+import { filterForLocation, filterForPaceOfStudy } from "../utils/Filter";
 import "../css/educations.css";
 import { EducationCard } from "../components/EducationCard";
 import type { ResponseData } from "../models/Education";
@@ -10,13 +11,27 @@ export const Educations = () => {
   const [searchParams] = useSearchParams();
   const [education, setEducation] = useState<ResponseData>();
   const query = searchParams.get("query") || "";
-  const { fetchEducations, educations, loading, error } =
-    useContext(EducationContext);
+  const {
+    fetchEducations,
+    educations,
+    loading,
+    error,
+    filterLocation,
+    filterPaceOfStudy,
+  } = useContext(EducationContext);
 
   useEffect(() => {
     fetchEducations(query);
   }, [query]);
   console.log(educations);
+
+  const filterData = () => {
+    const filter1 = filterForPaceOfStudy(educations, filterPaceOfStudy);
+    const filteredData = filterForLocation(filter1, filterLocation);
+    return filteredData;
+  };
+  // filtrerar på all fetchad data, även när det ändras
+  const filteredEducations = filterData();
   return (
     <>
       <div className="columns">

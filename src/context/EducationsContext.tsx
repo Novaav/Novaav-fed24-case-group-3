@@ -1,5 +1,11 @@
-import { createContext, useReducer } from "react";
-import type { Education, ResponseData } from "../models/Education";
+import {
+  createContext,
+  useReducer,
+  useState,
+  type Dispatch,
+  type SetStateAction,
+} from "react";
+import type { ResponseData } from "../models/Education";
 import { educationReducer } from "../reducer/educationReducer";
 import { fetchEducations } from "../api/api";
 
@@ -8,6 +14,10 @@ export interface IEducationContext {
   loading: boolean;
   error: string | null;
   fetchEducations: (query: string) => Promise<void>;
+  setFilterLocation: Dispatch<SetStateAction<string[]>>;
+  setFilterPaceOfStudy: Dispatch<SetStateAction<string[]>>;
+  filterLocation: string[];
+  filterPaceOfStudy: string[];
 }
 
 export const EducationContext = createContext<IEducationContext>({
@@ -15,6 +25,10 @@ export const EducationContext = createContext<IEducationContext>({
   loading: false,
   error: null,
   fetchEducations: async () => {},
+  setFilterLocation: () => {},
+  setFilterPaceOfStudy: () => {},
+  filterLocation: [],
+  filterPaceOfStudy: [],
 });
 
 export const EducationContextProvider = ({
@@ -22,6 +36,8 @@ export const EducationContextProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
+  const [filterLocation, setFilterLocation] = useState<string[]>([]);
+  const [filterPaceOfStudy, setFilterPaceOfStudy] = useState<string[]>([]);
   const [state, dispatch] = useReducer(educationReducer, {
     educations: [],
     loading: false,
@@ -42,7 +58,14 @@ export const EducationContextProvider = ({
 
   return (
     <EducationContext.Provider
-      value={{ ...state, fetchEducations: fetchEducationsHandler }}
+      value={{
+        ...state,
+        fetchEducations: fetchEducationsHandler,
+        filterLocation,
+        setFilterLocation,
+        filterPaceOfStudy,
+        setFilterPaceOfStudy,
+      }}
     >
       {children}
     </EducationContext.Provider>
