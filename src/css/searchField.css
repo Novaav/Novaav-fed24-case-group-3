@@ -1,8 +1,9 @@
 @import "@digi/arbetsformedlingen/dist/digi-arbetsformedlingen/digi-arbetsformedlingen.css";
 @import "@digi/arbetsformedlingen/dist/digi-arbetsformedlingen/fonts/src/fonts.css";
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+.DigiLayoutColumns {
+  border: 4px solid black;
+}
+
+.DigiFormInput {
 }

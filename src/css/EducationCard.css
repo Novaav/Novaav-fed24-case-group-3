@@ -1,0 +1,40 @@
+.education-card {
+  margin-bottom: 1.2rem;
+  list-style: none;
+  transition: box-shadow 0.2s;
+}
+
+.education-card:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+
+.card-info {
+  margin-top: 1rem;
+}
+
+.card-info p {
+  padding: 0;
+  margin: 0;
+}
+
+.provider-row,
+.pace-row {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  margin-bottom: 0.3rem;
+}
+
+.provider-label,
+.pace-label {
+  font-weight: 600;
+  color: #2c3e50;
+  font-size: 0.98rem;
+}
+
+.providers,
+.pace {
+  color: #2980b9;
+  font-size: 0.98rem;
+}
