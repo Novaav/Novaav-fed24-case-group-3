@@ -16,7 +16,7 @@ export const Educations = () => {
   useEffect(() => {
     fetchEducations(query);
   }, [query]);
-
+  console.log(educations);
   return (
     <>
       <div className="columns">
