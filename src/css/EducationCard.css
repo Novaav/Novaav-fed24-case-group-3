@@ -1,33 +1,40 @@
 .education-card {
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  padding: 1.5rem 1.2rem;
   margin-bottom: 1.2rem;
   list-style: none;
   transition: box-shadow 0.2s;
-  border: 1px solid #eaeaea;
 }
 
 .education-card:hover {
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.14);
-  border-color: #d0d0d0;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
 }
 
-.education-card h4 {
-  margin: 0 0 0.5rem 0;
-  font-size: 1.2rem;
-  color: #1e1e1e;
+.card-info {
+  margin-top: 1rem;
 }
 
-.education-card p {
-  margin: 0.3rem 0;
-  color: #555;
-  font-size: 1rem;
+.card-info p {
+  padding: 0;
+  margin: 0;
 }
 
-.education-card .providers {
-  margin-top: 0.7rem;
-  font-size: 0.95rem;
-  font-weight: 500;
+.provider-row,
+.pace-row {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  margin-bottom: 0.3rem;
+}
+
+.provider-label,
+.pace-label {
+  font-weight: 600;
+  color: #2c3e50;
+  font-size: 0.98rem;
+}
+
+.providers,
+.pace {
+  color: #2980b9;
+  font-size: 0.98rem;
 }

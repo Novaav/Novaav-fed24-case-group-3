@@ -36,7 +36,6 @@ export const Educations = () => {
     <>
       <div className="columns">
         <aside className="sidebar">
-          <h1>Utbildningar</h1>
           {loading && <p>Laddar...</p>}
           {error && <p>Det gick inte att hämta utbildningar.</p>}
           <ul>
