@@ -13,7 +13,6 @@ interface DescriptionProps {
   education?: ResponseData;
 }
 export const Description = ({ education }: DescriptionProps) => {
-  // hittar titlar, letar och hittar swe. gör variabel av den och använder i return
   const titles = education?.education?.title ?? null;
   const findedTitle = titles?.find((i) => i.lang === "swe");
   const title = findedTitle?.content;
@@ -26,6 +25,16 @@ export const Description = ({ education }: DescriptionProps) => {
   const schoolForm = education?.education?.form?.code;
   const systemCode = education?.education?.credits?.system?.code;
   const credits = education?.education?.credits?.credits;
+  const location = education?.eventSummary?.municipalityCode;
+  const distance = education?.eventSummary?.distance;
+
+  const eligibilitys =
+    education?.education?.eligibility?.eligibilityDescription[0];
+  console.log(eligibilitys);
+  const findEligibility = eligibilitys?.find((i) => i.lang === "swe");
+  const eligibility = findEligibility?.content;
+  console.log(eligibility);
+
   return (
     <>
       <DigiLayoutBlock afVariation={LayoutBlockVariation.PRIMARY}>
@@ -35,8 +44,14 @@ export const Description = ({ education }: DescriptionProps) => {
             <p> {title && title}</p>
             <p slot="secondary" className="text">
               {" "}
-              {schoolForm}, {credits} {systemCode?.toUpperCase()}
+              {/* {schoolForm}, {credits} {systemCode?.toUpperCase()} */}
+              {schoolName} , {location} , {schoolForm} ,{" "}
+              {distance ? "Distans" : "Platsbunden"}
             </p>
+          </DigiTypographyMeta>
+          <DigiTypographyMeta afVariation={TypographyMetaVariation.PRIMARY}>
+            <p> Behörigheter du kommer besitta </p>
+            <p slot="secondary"> {eligibility}</p>
           </DigiTypographyMeta>
           <DigiTypographyMeta afVariation={TypographyMetaVariation.PRIMARY}>
             <p>Beskrivning av utbildningen</p>

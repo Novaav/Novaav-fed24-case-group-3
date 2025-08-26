@@ -10,8 +10,7 @@ export const FilterContainer = () => {
   const [paceOfStudy, setPaceOfStudy] = useState<
     { id: string; label: string }[]
   >([]);
-  const { educations, loading, error, fetchEducations } =
-    useContext(EducationContext);
+  const { educations } = useContext(EducationContext);
 
   const [filterPaceOfStudy, setFilterPaceOfStudy] = useState<string[]>();
   const [filterLocation, setFilterLocation] = useState<string[]>();

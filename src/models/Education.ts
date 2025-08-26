@@ -18,6 +18,9 @@ export interface Credits {
   system: CodeType;
   credits: number;
 }
+export interface Eligibility {
+  eligibilityDescription: [[{ lang: string; content: string }]];
+}
 
 export interface Education {
   identifier: string;
@@ -36,6 +39,7 @@ export interface Education {
   credits?: Credits;
   educationLevel?: CodeType;
   eligibleForStudentAid?: CodeType;
+  eligibility?: Eligibility;
 }
 
 export interface ProviderSummary {
