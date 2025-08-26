@@ -54,7 +54,6 @@ export const Educations = () => {
         ) : (
           <p>Hej! anropa mig, en annan komponent. Wopidop</p>
         )}
-        <main className="main-content"></main>
       </div>
     </>
   );

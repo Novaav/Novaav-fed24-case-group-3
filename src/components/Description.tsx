@@ -54,7 +54,10 @@ export const Description = ({ education }: DescriptionProps) => {
 
   return (
     <>
-      <DigiLayoutBlock afVariation={LayoutBlockVariation.PRIMARY}>
+      <DigiLayoutBlock
+        afVariation={LayoutBlockVariation.PRIMARY}
+        className="content-wrapper"
+      >
         <DigiTypography>
           <h2>{schoolName}</h2>
           <DigiTypographyMeta afVariation={TypographyMetaVariation.PRIMARY}>

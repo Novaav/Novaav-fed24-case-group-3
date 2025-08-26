@@ -1,3 +1,9 @@
 .text {
   text-transform: capitalize;
 }
+
+.content-wrapper {
+  overflow-y: auto;
+  flex: 1;
+  padding: 2rem 0;
+}
