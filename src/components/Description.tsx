@@ -8,9 +8,9 @@ import {
   DigiTypographyMeta,
 } from "@digi/arbetsformedlingen-react";
 import type { ResponseData } from "../models/Education";
-import "../css/Description.css";
 import { useEffect, useState } from "react";
 import { fetchAllLocations } from "../api/api";
+import { Link } from "react-router";
 interface DescriptionProps {
   education?: ResponseData;
 }
@@ -54,10 +54,7 @@ export const Description = ({ education }: DescriptionProps) => {
 
   return (
     <>
-      <DigiLayoutBlock
-        afVariation={LayoutBlockVariation.PRIMARY}
-        className="content-wrapper"
-      >
+      <DigiLayoutBlock afVariation={LayoutBlockVariation.PRIMARY}>
         <DigiTypography>
           <h2>{schoolName}</h2>
           <DigiTypographyMeta afVariation={TypographyMetaVariation.PRIMARY}>
@@ -88,6 +85,7 @@ export const Description = ({ education }: DescriptionProps) => {
               dangerouslySetInnerHTML={{ __html: description ?? "" }}
             ></p>
           </DigiTypographyMeta>
+          <Link to={`/jobs`}>{`Se relaterade yrken >`}</Link>
         </DigiTypography>
       </DigiLayoutBlock>
     </>
