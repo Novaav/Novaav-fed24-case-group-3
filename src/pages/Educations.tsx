@@ -1,12 +1,15 @@
 import { useSearchParams } from "react-router";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { EducationContext } from "../context/EducationsContext";
 import { filterForLocation, filterForPaceOfStudy } from "../utils/Filter";
 import "../css/educations.css";
 import { EducationCard } from "../components/EducationCard";
+import type { ResponseData } from "../models/Education";
+import { Description } from "../components/Description";
 
 export const Educations = () => {
   const [searchParams] = useSearchParams();
+  const [education, setEducation] = useState<ResponseData>();
   const query = searchParams.get("query") || "";
   const {
     fetchEducations,
@@ -20,6 +23,7 @@ export const Educations = () => {
   useEffect(() => {
     fetchEducations(query);
   }, [query]);
+  console.log(educations);
 
   const filterData = () => {
     const filter1 = filterForPaceOfStudy(educations, filterPaceOfStudy);
@@ -36,12 +40,20 @@ export const Educations = () => {
           {loading && <p>Laddar...</p>}
           {error && <p>Det gick inte att hämta utbildningar.</p>}
           <ul>
-            {filteredEducations.map((e) => (
-              <EducationCard key={e.id} education={e} />
+            {educations.map((education) => (
+              <EducationCard
+                key={education.id}
+                education={education}
+                handleClick={() => setEducation(education)}
+              />
             ))}
           </ul>
         </aside>
-        {/* Description / Main content component goes here*/}
+        {education ? (
+          <Description education={education} />
+        ) : (
+          <p>Hej! anropa mig, en annan komponent. Wopidop</p>
+        )}
         <main className="main-content"></main>
       </div>
     </>

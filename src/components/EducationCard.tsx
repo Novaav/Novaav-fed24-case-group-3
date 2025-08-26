@@ -20,8 +20,14 @@ interface EducationData {
   };
 }
 
-export const EducationCard = ({ education }: { education: EducationData }) => (
-  <li className="education-card">
+export const EducationCard = ({
+  education,
+  handleClick,
+}: {
+  education: EducationData;
+  handleClick: () => void;
+}) => (
+  <li className="education-card" onClick={handleClick}>
     <h4>{education.education?.title?.[0]?.content || ""}</h4>
     <p>
       {education.education?.description?.[0]?.content?.slice(0, 60) + "..." ||
