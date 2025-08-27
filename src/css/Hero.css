@@ -79,13 +79,8 @@ body {
 }
 
 .search-container button {
-  background: #0173b1 !important;
   transition: background 0.2s ease !important;
   cursor: pointer;
-}
-
-.search-container button:hover {
-  background: #0ba6ec !important;
 }
 
 .search-container input {

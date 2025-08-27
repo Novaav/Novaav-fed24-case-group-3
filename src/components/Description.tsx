@@ -19,10 +19,10 @@ interface DescriptionProps {
   education?: ResponseData;
 }
 
-
-
 export const Description = ({ education }: DescriptionProps) => {
-  const [allLocations, setAllLocations] = useState<{ key: string; value: string }[]>([]);
+  const [allLocations, setAllLocations] = useState<
+    { key: string; value: string }[]
+  >([]);
   const [searchParams] = useSearchParams();
   const query = searchParams.get("query") || "";
 
@@ -33,14 +33,19 @@ export const Description = ({ education }: DescriptionProps) => {
   if (!education) return null;
 
   const location =
-    allLocations.find(l => l.key === education.eventSummary?.municipalityCode?.[0])?.value || "Okänd plats";
+    allLocations.find(
+      (l) => l.key === education.eventSummary?.municipalityCode?.[0]
+    )?.value || "Okänd plats";
   const title = getContentByLang(education.education?.title);
   const description = getContentByLang(education.education?.description);
   const schoolName = education.providerSummary?.providers;
   const schoolForm = education.education?.form?.code;
   const distance = education.eventSummary?.distance;
   const pace = education.eventSummary?.paceOfStudyPercentage || "Ej angivet";
-  const eligibility = education.education?.eligibility?.eligibilityDescription[0]?.find(i => i.lang === "swe")?.content;
+  const eligibility =
+    education.education?.eligibility?.eligibilityDescription[0]?.find(
+      (i) => i.lang === "swe"
+    )?.content;
 
   const infoData = {
     program: title || "Okänt program",
@@ -61,14 +66,17 @@ export const Description = ({ education }: DescriptionProps) => {
           <DigiTypographyMeta afVariation={TypographyMetaVariation.PRIMARY}>
             <p>{title}</p>
             <p slot="secondary" className="text">
-              {schoolName}, {location}, {schoolForm}, {distance ? "Distans" : "Platsbunden"}
+              {schoolName}, {location}, {schoolForm},{" "}
+              {distance ? "Distans" : "Platsbunden"}
             </p>
           </DigiTypographyMeta>
 
           <DigiTypographyMeta afVariation={TypographyMetaVariation.PRIMARY}>
             <p>Information om utbildningen</p>
             <p slot="secondary">Studietakt: {pace} %</p>
-            <p slot="secondary">{distance ? "Utbildning på distans" : "Platsbunden utbildning"}</p>
+            <p slot="secondary">
+              {distance ? "Utbildning på distans" : "Platsbunden utbildning"}
+            </p>
           </DigiTypographyMeta>
 
           <DigiTypographyMeta afVariation={TypographyMetaVariation.PRIMARY}>
@@ -78,10 +86,11 @@ export const Description = ({ education }: DescriptionProps) => {
 
           <DigiTypographyMeta afVariation={TypographyMetaVariation.PRIMARY}>
             <p>Beskrivning av utbildningen</p>
-            <p slot="secondary" dangerouslySetInnerHTML={{ __html: description || "" }} />
+            <p
+              slot="secondary"
+              dangerouslySetInnerHTML={{ __html: description || "" }}
+            />
           </DigiTypographyMeta>
-
-          <Link to={`/jobs?query=${encodeURIComponent(query)}`}>Se relaterade yrken &gt;</Link>
         </DigiTypography>
       </DigiLayoutBlock>
     </div>
