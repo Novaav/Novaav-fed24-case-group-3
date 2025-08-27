@@ -8,6 +8,7 @@ type InfoBoxProps = {
     location: string;
     pace: number | string;
     website?: string | null;
+    identifier?: string | null;
   };
 };
 
@@ -16,7 +17,8 @@ export const InfoBox = ({ education }: InfoBoxProps) => {
   const { program, credits, location, pace, website } = education;
 
   const handleRelatedJobs = () => {
-    navigate(`/jobs?query=${encodeURIComponent(program)}`);
+    const searchTerm = program.replace(/\s+/g, "-");
+    navigate(`/jobs?query=${encodeURIComponent(searchTerm)}`);
   };
 
   return (
