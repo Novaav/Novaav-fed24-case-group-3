@@ -20,11 +20,6 @@ header {
 
 .digi-logo__system-name {
   margin: 0 !important;
-  padding: 0 !important;
-}
-
-.sc-digi-logo-h .digi-logo__system-name.sc-digi-logo::before {
-  display: none !important;
 }
 
 .digi-form-input__label {
@@ -35,10 +30,6 @@ header {
   gap: 0 !important;
 }
 
-.sc-digi-header .sc-digi-layout-block {
-  gap: 1rem;
-}
-
-form .sc-digi-header .sc-digi-layout-block {
-  gap: 0;
+.digi-header .sc-digi-header .digi-form-filter {
+  margin-left: 1rem;
 }
