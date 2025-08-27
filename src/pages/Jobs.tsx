@@ -32,9 +32,10 @@ export const Jobs = () => {
             afHeading={job.headline}
             afHeadingLevel={InfoCardMultiHeadingLevel.H2}
             afType={InfoCardMultiType.RELATED}
-            afLinkHref={`/jobs/${job.id}`}
             key={job.id}
-          ></DigiInfoCardMulti>
+          >
+            <Link to={`/jobs/${job.id}`}>Läs mer</Link>
+          </DigiInfoCardMulti>
         ))}
       </div>
     </MasterDetailLayout>
