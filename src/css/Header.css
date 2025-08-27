@@ -6,7 +6,16 @@ header {
 /*  Digi-header resets ...  */
 
 .digi-logo__img {
-  display: none !important;
+  /*display: none !important;*/
+}
+
+/* add logo.png instead of current logo*/
+
+.digi-logo__img {
+  content: url("../assets/logo.png") !important;
+  width: auto !important;
+  height: 40px !important;
+  margin-right: 0.5rem !important;
 }
 
 .digi-logo__system-name {
