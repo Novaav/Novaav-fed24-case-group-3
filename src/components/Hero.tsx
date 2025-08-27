@@ -74,7 +74,7 @@ const Hero: React.FC = () => {
   }, [query, performSearch]);
 
   const handleSelect = (edu: Education) => {
-    navigate(`/educations?selected=${edu.id}`);
+    navigate(`/educations?query=${query}`);
   };
 
   const handleSearchSubmit = () => {
