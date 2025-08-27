@@ -73,6 +73,13 @@ const Hero: React.FC = () => {
     return () => clearTimeout(handler);
   }, [query, performSearch]);
 
+  useEffect(() => {
+    document.body.style.overflowY = "hidden";
+    return () => {
+      document.body.style.overflowY = "";
+    };
+  }, []);
+
   const handleSelect = (edu: Education) => {
     navigate(`/educations?query=${query}`);
   };

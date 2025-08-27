@@ -16,3 +16,18 @@
   flex-grow: 1;
   padding: 1rem;
 }
+
+@media (max-width: 900px) {
+  .columns {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    overflow-y: unset;
+  }
+
+  .main-content {
+    padding: 0.5rem;
+  }
+}

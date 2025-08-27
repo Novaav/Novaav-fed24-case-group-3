@@ -37,9 +37,9 @@ export const EducationCard = ({
   <li className="education-card" onClick={handleClick}>
     <DigiInfoCard
       afHeading={education.education?.title?.[0]?.content || ""}
-      afHeadingLevel={InfoCardHeadingLevel.H2}
+      afHeadingLevel={InfoCardHeadingLevel.H3}
       afType={InfoCardType.TIP}
-      afVariation={InfoCardVariation.PRIMARY}
+      afVariation={InfoCardVariation.SECONDARY}
       afSize={InfoCardSize.STANDARD}
     >
       {education.education?.description?.[0]?.content?.slice(0, 60) + "..." ||
