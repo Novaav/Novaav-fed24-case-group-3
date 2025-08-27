@@ -42,26 +42,24 @@ export const EducationCard = ({
       afVariation={InfoCardVariation.PRIMARY}
       afSize={InfoCardSize.STANDARD}
     >
-      <p>
-        {education.education?.description?.[0]?.content?.slice(0, 60) + "..." ||
-          ""}
-        <div className="card-info">
-          <div className="provider-row">
-            <span className="provider-label">Skola:</span>
-            <span className="providers">
-              {education.providerSummary?.providers?.join(", ")}
-            </span>
-          </div>
-          <div className="pace-row">
-            <span className="pace-label">Studietakt:</span>
-            <span className="pace">
-              {education.eventSummary?.paceOfStudyPercentage
-                ? education.eventSummary.paceOfStudyPercentage.join(", ") + "%"
-                : "-"}
-            </span>
-          </div>
+      {education.education?.description?.[0]?.content?.slice(0, 60) + "..." ||
+        ""}
+      <div className="card-info">
+        <div className="provider-row">
+          <span className="provider-label">Skola:</span>
+          <span className="providers">
+            {education.providerSummary?.providers?.join(", ")}
+          </span>
         </div>
-      </p>
+        <div className="pace-row">
+          <span className="pace-label">Studietakt:</span>
+          <span className="pace">
+            {education.eventSummary?.paceOfStudyPercentage
+              ? education.eventSummary.paceOfStudyPercentage.join(", ") + "%"
+              : "-"}
+          </span>
+        </div>
+      </div>
     </DigiInfoCard>
   </li>
 );
