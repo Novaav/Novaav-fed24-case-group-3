@@ -11,6 +11,7 @@ import type { ResponseData } from "../models/Education";
 import "../css/Description.css";
 import { useEffect, useState } from "react";
 import { fetchAllLocations } from "../api/api";
+import { getContentByLang } from "../helpers/getContentByLang";
 interface DescriptionProps {
   education?: ResponseData;
 }
@@ -28,12 +29,6 @@ export const Description = ({ education }: DescriptionProps) => {
   }, []);
   const matchLocation = education?.eventSummary?.municipalityCode?.[0];
   const location = allLocations.find((l) => l.key === matchLocation)?.value;
-
-  // funktion som hämtar lang === swe
-  const getContentByLang = (
-    items: { lang: string; content: string }[] | undefined,
-    lang = "swe"
-  ) => items?.find((i) => i.lang === lang)?.content ?? null;
 
   const title = getContentByLang(education?.education?.title);
 
