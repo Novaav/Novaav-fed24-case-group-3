@@ -10,86 +10,80 @@ import {
 import type { ResponseData } from "../models/Education";
 import { useEffect, useState } from "react";
 import { fetchAllLocations } from "../api/api";
-import { Link } from "react-router";
+import { Link, useSearchParams } from "react-router";
 import { getContentByLang } from "../utils/getContentByLang";
-import { useSearchParams } from "react-router";
+import { InfoBox } from "./InfoBox";
+import "../css/Infobox.css";
 
 interface DescriptionProps {
   education?: ResponseData;
 }
+
+
+
 export const Description = ({ education }: DescriptionProps) => {
-  const [allLocations, setAllLocations] = useState<
-    { key: string; value: string }[]
-  >([]);
-
-  const getLocations = async () => {
-    const locations = await fetchAllLocations();
-    setAllLocations(locations);
-  };
-
+  const [allLocations, setAllLocations] = useState<{ key: string; value: string }[]>([]);
   const [searchParams] = useSearchParams();
   const query = searchParams.get("query") || "";
 
   useEffect(() => {
-    getLocations();
+    fetchAllLocations().then(setAllLocations);
   }, []);
 
-  const matchLocation = education?.eventSummary?.municipalityCode?.[0];
-  const location = allLocations.find((l) => l.key === matchLocation)?.value;
+  if (!education) return null;
 
-  const title = getContentByLang(education?.education?.title);
+  const location =
+    allLocations.find(l => l.key === education.eventSummary?.municipalityCode?.[0])?.value || "Okänd plats";
+  const title = getContentByLang(education.education?.title);
+  const description = getContentByLang(education.education?.description);
+  const schoolName = education.providerSummary?.providers;
+  const schoolForm = education.education?.form?.code;
+  const distance = education.eventSummary?.distance;
+  const pace = education.eventSummary?.paceOfStudyPercentage || "Ej angivet";
+  const eligibility = education.education?.eligibility?.eligibilityDescription[0]?.find(i => i.lang === "swe")?.content;
 
-  const description = getContentByLang(education?.education?.description);
-
-  const schoolName = education?.providerSummary?.providers;
-  const schoolForm = education?.education?.form?.code;
-  const systemCode = education?.education?.credits?.system?.code;
-  const credits = education?.education?.credits?.credits;
-  const distance = education?.eventSummary?.distance;
-  const pace = education?.eventSummary?.paceOfStudyPercentage;
-
-  const eligibilitys =
-    education?.education?.eligibility?.eligibilityDescription[0];
-  const findEligibility = eligibilitys?.find((i) => i.lang === "swe");
-  const eligibility = findEligibility?.content;
+  const infoData = {
+    program: title || "Okänt program",
+    credits: education.education?.credits?.credits || "Ej angivet",
+    location,
+    pace,
+    website: education.education?.url || education.applicationUrl || null,
+  };
 
   return (
-    <>
+    <div style={{ position: "relative" }}>
+      <InfoBox education={infoData} />
+
       <DigiLayoutBlock afVariation={LayoutBlockVariation.PRIMARY}>
         <DigiTypography>
           <h2>{schoolName}</h2>
+
           <DigiTypographyMeta afVariation={TypographyMetaVariation.PRIMARY}>
-            <p> {title && title}</p>
+            <p>{title}</p>
             <p slot="secondary" className="text">
-              {" "}
-              {schoolName} , {location} , {schoolForm} ,{" "}
-              {distance ? "Distans" : "Platsbunden"}
+              {schoolName}, {location}, {schoolForm}, {distance ? "Distans" : "Platsbunden"}
             </p>
           </DigiTypographyMeta>
+
           <DigiTypographyMeta afVariation={TypographyMetaVariation.PRIMARY}>
-            <p> Information om utbildningen</p>
-            <p slot="secondary"> Studietakt : {pace} % </p>
-            <p slot="secondary">
-              Platsbunden/ distans :{" "}
-              {distance ? "Utbildning på distans" : "Platsbunden utbildning"}{" "}
-            </p>
+            <p>Information om utbildningen</p>
+            <p slot="secondary">Studietakt: {pace} %</p>
+            <p slot="secondary">{distance ? "Utbildning på distans" : "Platsbunden utbildning"}</p>
           </DigiTypographyMeta>
+
           <DigiTypographyMeta afVariation={TypographyMetaVariation.PRIMARY}>
-            <p> Behörigheter du kommer besitta </p>
-            <p slot="secondary"> {eligibility}</p>
+            <p>Behörigheter du kommer besitta</p>
+            <p slot="secondary">{eligibility}</p>
           </DigiTypographyMeta>
+
           <DigiTypographyMeta afVariation={TypographyMetaVariation.PRIMARY}>
             <p>Beskrivning av utbildningen</p>
-            <p
-              slot="secondary"
-              dangerouslySetInnerHTML={{ __html: description ?? "" }}
-            ></p>
+            <p slot="secondary" dangerouslySetInnerHTML={{ __html: description || "" }} />
           </DigiTypographyMeta>
-          <Link
-            to={`/jobs?query=${encodeURIComponent(query)}`}
-          >{`Se relaterade yrken >`}</Link>
+
+          <Link to={`/jobs?query=${encodeURIComponent(query)}`}>Se relaterade yrken &gt;</Link>
         </DigiTypography>
       </DigiLayoutBlock>
-    </>
+    </div>
   );
 };

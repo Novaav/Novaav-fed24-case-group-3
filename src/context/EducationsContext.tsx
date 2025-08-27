@@ -9,6 +9,7 @@ import type { ResponseData } from "../models/Education";
 import { educationReducer } from "../reducer/educationReducer";
 import { fetchEducations } from "../api/api";
 
+
 export interface IEducationContext {
   educations: ResponseData[];
   loading: boolean;
