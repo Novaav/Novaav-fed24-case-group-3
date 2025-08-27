@@ -11,7 +11,8 @@ import type { ResponseData } from "../models/Education";
 import { useEffect, useState } from "react";
 import { fetchAllLocations } from "../api/api";
 import { Link } from "react-router";
-import { getContentByLang } from "../helpers/getContentByLang";
+import { getContentByLang } from "../utils/getContentByLang";
+import { useSearchParams } from "react-router";
 
 interface DescriptionProps {
   education?: ResponseData;
@@ -25,9 +26,14 @@ export const Description = ({ education }: DescriptionProps) => {
     const locations = await fetchAllLocations();
     setAllLocations(locations);
   };
+
+  const [searchParams] = useSearchParams();
+  const query = searchParams.get("query") || "";
+
   useEffect(() => {
     getLocations();
   }, []);
+
   const matchLocation = education?.eventSummary?.municipalityCode?.[0];
   const location = allLocations.find((l) => l.key === matchLocation)?.value;
 
@@ -81,7 +87,9 @@ export const Description = ({ education }: DescriptionProps) => {
               dangerouslySetInnerHTML={{ __html: description ?? "" }}
             ></p>
           </DigiTypographyMeta>
-          <Link to={`/jobs`}>{`Se relaterade yrken >`}</Link>
+          <Link
+            to={`/jobs?query=${encodeURIComponent(query)}`}
+          >{`Se relaterade yrken >`}</Link>
         </DigiTypography>
       </DigiLayoutBlock>
     </>
