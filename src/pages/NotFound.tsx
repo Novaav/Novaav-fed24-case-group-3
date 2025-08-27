@@ -29,9 +29,9 @@ export const NotFound = () => {
       }}
     >
       <DigiTypography afVariation={TypographyVariation.SMALL}>
-        <h1>404 – Sidan kunde inte hittas</h1>
+        <h1>404 - Sidan kunde inte hittas</h1>
 
-        <DigiTypographyMeta afVariation={TypographyMetaVariation.MEDIUM}>
+        <DigiTypographyMeta afVariation={TypographyMetaVariation.PRIMARY}>
           Ojdå! Sidan du letade efter verkar inte finnas. Kontrollera adressen
           eller gå tillbaka till startsidan.
         </DigiTypographyMeta>
