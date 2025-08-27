@@ -49,12 +49,19 @@ const Hero: React.FC = () => {
     }
     try {
       const data = await fetchEducations(searchQuery);
-      const mapped: Education[] = (data as EducationApiItem[])
-        .slice(0, 5)
-        .map((item) => ({
-          id: item.education.identifier,
-          title: item.education.title?.[0]?.content ?? "Ingen titel",
-        }));
+      const seenTitles = new Set<string>();
+      const mapped: Education[] = [];
+      for (const item of data as EducationApiItem[]) {
+        const title = item.education.title?.[0]?.content ?? "Ingen titel";
+        if (!seenTitles.has(title)) {
+          mapped.push({
+            id: item.education.identifier,
+            title,
+          });
+          seenTitles.add(title);
+        }
+        if (mapped.length >= 5) break;
+      }
       setResults(mapped);
     } catch {
       setResults([]);

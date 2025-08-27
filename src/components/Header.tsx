@@ -9,7 +9,7 @@ export const Header = () => {
 
   return (
     <DigiHeader
-      afSystemName="Vår app..."
+      afSystemName="Karriär Kompassen"
       afHideSystemName={false}
       afMenuButtonText="Meny"
     >
