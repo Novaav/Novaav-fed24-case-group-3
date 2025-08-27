@@ -17,16 +17,34 @@ export const Jobs = () => {
   useEffect(() => {
     fetchJobs(query);
   }, []);
+
   return (
     <MasterDetailLayout>
       <div className="jobs-container">
         {jobs.map((job) => (
           <DigiInfoCardMulti
             afHeading={job.headline}
-            afHeadingLevel={InfoCardMultiHeadingLevel.H2}
+            afHeadingLevel={InfoCardMultiHeadingLevel.H3}
             afType={InfoCardMultiType.RELATED}
             key={job.id}
+            className="job-card"
           >
+            {job.logo_url && (
+              <img
+                src={job.logo_url}
+                alt={`${job.employer?.name} logotyp`}
+                className="job-logo"
+              />
+            )}
+            <div className="job-ad-details">
+              <p>
+                <strong>Företag:</strong> {job.employer?.name}
+              </p>
+              <p>
+                <strong>Stad:</strong> {job.workplace_address?.municipality}
+              </p>
+            </div>
+
             <Link to={`/jobs/${job.id}`}>Läs mer</Link>
           </DigiInfoCardMulti>
         ))}

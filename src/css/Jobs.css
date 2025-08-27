@@ -4,3 +4,31 @@
   grid-template-columns: repeat(3, 1fr);
   padding: 0 2rem;
 }
+
+.job-card {
+  position: relative;
+}
+
+.job-logo {
+  position: absolute;
+  top: 1.5rem;
+  right: 1rem;
+  width: 52px;
+  height: 52px;
+  object-fit: contain;
+  z-index: 10;
+}
+
+.job-card h3 {
+  padding-right: 3rem !important;
+  margin-top: 0.5rem;
+}
+
+/* Job details section */
+.job-ad-details {
+  margin-top: 0, 5rem;
+}
+
+.job-ad-details p {
+  margin: 0.25rem 0;
+}
