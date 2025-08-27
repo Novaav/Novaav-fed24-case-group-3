@@ -26,14 +26,7 @@ export const Jobs = () => {
   }, []);
   return (
     <MasterDetailLayout>
-      <div
-        style={{
-          display: "grid",
-          gap: "1rem",
-          gridTemplateColumns: "repeat(3, 1fr)",
-        }}
-        className="jobs-container"
-      >
+      <div className="jobs-container">
         {jobs.map((job) => (
           <DigiInfoCardMulti
             afHeading={job.headline}
@@ -41,9 +34,7 @@ export const Jobs = () => {
             afType={InfoCardMultiType.RELATED}
             afLinkHref={`/jobs/${job.id}`}
             key={job.id}
-          >
-            <Link to={`/jobs/${job.id}`}>Läs mer</Link>
-          </DigiInfoCardMulti>
+          ></DigiInfoCardMulti>
         ))}
       </div>
     </MasterDetailLayout>
