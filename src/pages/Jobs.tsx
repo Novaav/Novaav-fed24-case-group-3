@@ -2,17 +2,10 @@ import { useContext, useEffect } from "react";
 import { JobsContext } from "../context/JobsContext";
 import { MasterDetailLayout } from "./MasterDetailLayout";
 import { Link, useSearchParams } from "react-router";
-import {
-  DigiInfoCard,
-  DigiInfoCardMulti,
-  DigiInfoCardMultiContainer,
-  DigiLayoutColumns,
-} from "@digi/arbetsformedlingen-react";
+import { DigiInfoCardMulti } from "@digi/arbetsformedlingen-react";
 import {
   InfoCardMultiHeadingLevel,
   InfoCardMultiType,
-  LayoutColumnsElement,
-  LayoutColumnsVariation,
 } from "@digi/arbetsformedlingen";
 import "../css/Jobs.css";
 
