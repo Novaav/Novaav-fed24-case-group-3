@@ -44,7 +44,6 @@ export const Description = ({ education }: DescriptionProps) => {
 
   const eligibilitys =
     education?.education?.eligibility?.eligibilityDescription[0];
-  console.log(eligibilitys);
   const findEligibility = eligibilitys?.find((i) => i.lang === "swe");
   const eligibility = findEligibility?.content;
 
@@ -57,7 +56,6 @@ export const Description = ({ education }: DescriptionProps) => {
             <p> {title && title}</p>
             <p slot="secondary" className="text">
               {" "}
-              {/* {schoolForm}, {credits} {systemCode?.toUpperCase()} */}
               {schoolName} , {location} , {schoolForm} ,{" "}
               {distance ? "Distans" : "Platsbunden"}
             </p>
