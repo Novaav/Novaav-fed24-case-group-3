@@ -12,10 +12,10 @@ import {
 import type { ResponseData } from "../models/Education";
 import { useEffect, useState } from "react";
 import { fetchAllLocations } from "../api/api";
-import { useSearchParams } from "react-router";
 import { getContentByLang } from "../utils/getContentByLang";
 import { InfoBox } from "./InfoBox";
 import "../css/Infobox.css";
+import "../css/Description.css";
 
 interface DescriptionProps {
   education?: ResponseData;
@@ -25,7 +25,6 @@ export const Description = ({ education }: DescriptionProps) => {
   const [allLocations, setAllLocations] = useState<
     { key: string; value: string }[]
   >([]);
-  const [searchParams] = useSearchParams();
 
   useEffect(() => {
     fetchAllLocations().then(setAllLocations);
@@ -74,16 +73,12 @@ export const Description = ({ education }: DescriptionProps) => {
 
           <DigiTypographyMeta afVariation={TypographyMetaVariation.PRIMARY}>
             <p>Information om utbildningen</p>
-            {/* <p slot="secondary">Studietakt: {pace} %</p> */}
             <DigiList afListType={ListType.BULLET}>
               <li>Stidietakt: {pace} %</li>
               <li>
                 {distance ? "Utbildning på distans" : "Platsbunden utbildning"}
               </li>
             </DigiList>
-            {/* <p slot="secondary">
-              {distance ? "Utbildning på distans" : "Platsbunden utbildning"}
-            </p> */}
           </DigiTypographyMeta>
 
           <DigiTypographyMeta afVariation={TypographyMetaVariation.PRIMARY}>
