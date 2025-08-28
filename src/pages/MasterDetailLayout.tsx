@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import { useContext, useState } from "react";
 import { EducationContext } from "../context/EducationsContext";
-import { EducationCard } from "../components/EducationCard";
+import { EducationCard, type EducationData } from "../components/EducationCard";
 import { filterForLocation, filterForPaceOfStudy } from "../utils/Filter";
 import "../css/MasterDetailLayout.css";
 import "../css/educations.css";
@@ -15,7 +15,7 @@ export const MasterDetailLayout = ({
   onEducationClick,
 }: {
   children: ReactNode;
-  onEducationClick?: (education: any) => void;
+  onEducationClick?: (education: EducationData) => void;
 }) => {
   const [activeId, setActiveId] = useState<string | null>(null);
   const { educations, loading, error, filterLocation, filterPaceOfStudy } =
@@ -45,7 +45,7 @@ export const MasterDetailLayout = ({
     }
   }, [filteredEducations, onEducationClick]);
 
-  const handleEducationClick = (education: any) => {
+  const handleEducationClick = (education: EducationData) => {
     setActiveId(education.id);
     onEducationClick?.(education);
   };
