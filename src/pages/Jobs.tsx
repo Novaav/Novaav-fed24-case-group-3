@@ -1,9 +1,11 @@
 import { useContext, useEffect } from "react";
 import { JobsContext } from "../context/JobsContext";
 import { MasterDetailLayout } from "./MasterDetailLayout";
-import { Link, useSearchParams } from "react-router";
-import { DigiInfoCardMulti } from "@digi/arbetsformedlingen-react";
+import { Link, useNavigate, useSearchParams } from "react-router";
+import { DigiButton, DigiInfoCardMulti } from "@digi/arbetsformedlingen-react";
 import {
+  ButtonSize,
+  ButtonVariation,
   InfoCardMultiHeadingLevel,
   InfoCardMultiType,
 } from "@digi/arbetsformedlingen";
@@ -13,6 +15,7 @@ export const Jobs = () => {
   const { jobs, fetchJobs } = useContext(JobsContext);
   const [searchParams] = useSearchParams();
   const query = searchParams.get("query") || "";
+  const navigator = useNavigate();
 
   useEffect(() => {
     fetchJobs(query);
@@ -20,6 +23,14 @@ export const Jobs = () => {
 
   return (
     <MasterDetailLayout>
+      <DigiButton
+        afSize={ButtonSize.MEDIUM}
+        afVariation={ButtonVariation.SECONDARY}
+        afFullWidth={false}
+        onClick={() => navigator(-1)}
+      >
+        {`Gå tillbaka`}
+      </DigiButton>
       <div className="jobs-container">
         {jobs.map((job) => (
           <DigiInfoCardMulti

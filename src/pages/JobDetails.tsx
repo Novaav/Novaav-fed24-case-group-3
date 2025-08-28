@@ -1,4 +1,4 @@
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { MasterDetailLayout } from "./MasterDetailLayout";
 import { useContext } from "react";
 import { JobsContext } from "../context/JobsContext";
@@ -20,6 +20,7 @@ import { Link } from "react-router";
 export const JobDetails = () => {
   const { id } = useParams();
   const { jobs } = useContext(JobsContext);
+  const navigate = useNavigate();
 
   const job = jobs.find((job) => job.id === id);
 
@@ -37,6 +38,14 @@ export const JobDetails = () => {
   return (
     <MasterDetailLayout>
       <DigiLayoutBlock afVariation={LayoutBlockVariation.PRIMARY}>
+        <DigiButton
+          afSize={ButtonSize.MEDIUM}
+          afVariation={ButtonVariation.SECONDARY}
+          afFullWidth={false}
+          onClick={() => navigate(-1)}
+        >
+          {`Gå tillbaka`}
+        </DigiButton>
         <div className="job-header-container">
           {job.logo_url ? (
             <img
@@ -68,15 +77,6 @@ export const JobDetails = () => {
           </div>
         </div>
       </DigiLayoutBlock>
-      <Link to="/jobs">
-        <DigiButton
-          afSize={ButtonSize.MEDIUM}
-          afVariation={ButtonVariation.SECONDARY}
-          afFullWidth={false}
-        >
-          Tillbaka till relaterade yrken
-        </DigiButton>
-      </Link>
     </MasterDetailLayout>
   );
 };
