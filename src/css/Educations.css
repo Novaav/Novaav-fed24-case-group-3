@@ -2,7 +2,7 @@
 
 .columns {
   display: flex;
-  height: 80vh;
+  height: 80dvh;
 }
 
 /* SIDEBAR */
@@ -20,11 +20,13 @@
 @media (max-width: 900px) {
   .columns {
     flex-direction: column;
+    height: auto;
   }
 
   .sidebar {
     width: 100%;
     overflow-y: unset;
+    height: auto;
   }
 
   .main-content {

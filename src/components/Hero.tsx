@@ -76,7 +76,7 @@ const Hero: React.FC = () => {
   useEffect(() => {
     document.body.style.overflowY = "hidden";
     return () => {
-      document.body.style.overflowY = "";
+      document.body.style.overflowY = "auto";
     };
   }, []);
 

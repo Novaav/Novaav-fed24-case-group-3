@@ -11,3 +11,10 @@
 .slick-slide > div {
   padding: 0 12px;
 }
+
+@media (max-width: 900px) {
+  .content-wrapper {
+    padding: 1rem 0;
+    overflow: visible;
+  }
+}

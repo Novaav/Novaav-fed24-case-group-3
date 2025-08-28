@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router";
 import "../css/Infobox.css";
+import type { ProviderSummary } from "../models/Education";
 
 type InfoBoxProps = {
   education: {
@@ -10,9 +11,10 @@ type InfoBoxProps = {
     website?: string | null;
     identifier?: string | null;
   };
+  providerSummary?: ProviderSummary;
 };
 
-export const InfoBox = ({ education }: InfoBoxProps) => {
+export const InfoBox = ({ education, providerSummary }: InfoBoxProps) => {
   const navigate = useNavigate();
   const { program, credits, location, pace, website } = education;
 
@@ -32,7 +34,7 @@ export const InfoBox = ({ education }: InfoBoxProps) => {
           <strong>Högskolepoäng:</strong> {credits}
         </li>
         <li>
-          <strong>Plats:</strong> {location}
+          <strong>Plats:</strong> {providerSummary?.providers}
         </li>
         <li>
           <strong>Studietakt:</strong> {pace} %

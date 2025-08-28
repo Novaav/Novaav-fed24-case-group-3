@@ -3,14 +3,6 @@ header {
   z-index: 100;
 }
 
-/*  Digi-header resets ...  */
-
-.digi-logo__img {
-  /*display: none !important;*/
-}
-
-/* add logo.png instead of current logo*/
-
 .digi-logo__img {
   content: url("../assets/logo.png") !important;
   width: auto !important;
@@ -32,4 +24,24 @@ header {
 
 .digi-header .sc-digi-header .digi-form-filter {
   margin-left: 1rem;
+}
+
+nav .digi-header-navigation__inner {
+  display: flex;
+  position: absolute;
+  top: 2.4rem;
+  right: 1rem;
+}
+
+nav .digi-header-navigation-item {
+  display: flex;
+}
+
+@media screen and (max-width: 768px) {
+  nav .digi-header-navigation__inner {
+    position: unset;
+  }
+  nav .digi-header-navigation-item {
+    display: unset;
+  }
 }
