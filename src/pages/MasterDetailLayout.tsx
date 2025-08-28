@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { EducationContext } from "../context/EducationsContext";
 import { EducationCard } from "../components/EducationCard";
 import { filterForLocation, filterForPaceOfStudy } from "../utils/Filter";
@@ -17,6 +17,7 @@ export const MasterDetailLayout = ({
   children: ReactNode;
   onEducationClick?: (education: any) => void;
 }) => {
+  const [activeId, setActiveId] = useState<string | null>(null);
   const { educations, loading, error, filterLocation, filterPaceOfStudy } =
     useContext(EducationContext);
 
@@ -34,6 +35,11 @@ export const MasterDetailLayout = ({
   };
   const filteredEducations = filterData();
 
+  const handleEducationClick = (education: any) => {
+    setActiveId(education.id); // markera det här kortet som aktivt
+    onEducationClick?.(education); // kör ev. callback från props
+  };
+
   const sliderSettings = {
     dots: true,
     infinite: true,
@@ -47,6 +53,16 @@ export const MasterDetailLayout = ({
       <aside className="sidebar">
         {loading && <p>Laddar...</p>}
         {error && <p>Det gick inte att hämta utbildningar.</p>}
+        <ul>
+          {filteredEducations.map((education) => (
+            <EducationCard
+              key={education.id}
+              education={education}
+              handleClick={() => handleEducationClick?.(education)}
+              isActive={education.id === activeId}
+            />
+          ))}
+        </ul>
         {isMobile ? (
           <Slider {...sliderSettings}>
             {filteredEducations.map((education) => (
