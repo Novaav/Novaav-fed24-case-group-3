@@ -24,7 +24,7 @@ export const Jobs = () => {
         {jobs.map((job) => (
           <DigiInfoCardMulti
             afHeading={job.headline}
-            afHeadingLevel={InfoCardMultiHeadingLevel.H3}
+            afHeadingLevel={InfoCardMultiHeadingLevel.H5}
             afType={InfoCardMultiType.RELATED}
             key={job.id}
             className="job-card"
@@ -37,12 +37,16 @@ export const Jobs = () => {
               />
             )}
             <div className="job-ad-details">
-              <p>
-                <strong>Företag:</strong> {job.employer?.name}
-              </p>
-              <p>
-                <strong>Stad:</strong> {job.workplace_address?.municipality}
-              </p>
+              <div>
+                <span className="employer-label">Företag:</span>{" "}
+                <span className="employer">{job.employer?.name}</span>
+              </div>
+              <div>
+                <span className="address-label">Stad:</span>{" "}
+                <span className="address">
+                  {job.workplace_address?.municipality}
+                </span>
+              </div>
             </div>
 
             <Link to={`/jobs/${job.id}`}>Läs mer</Link>
