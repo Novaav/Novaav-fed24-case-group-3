@@ -1,0 +1,9 @@
+.job-logo-big {
+  height: 50px;
+  width: auto;
+  flex-shrink: 0;
+}
+
+.job-details-content {
+  width: 100%;
+}
