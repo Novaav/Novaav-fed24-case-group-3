@@ -7,6 +7,15 @@
 
 .job-card {
   position: relative;
+  transition: box-shadow 0.2s;
+  background-color: #f5f5f5;
+  border-radius: 4px;
+  padding: 1rem;
+}
+
+.job-card:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
 }
 
 .job-logo {
@@ -17,9 +26,11 @@
   height: 52px;
   object-fit: contain;
   z-index: 10;
+  margin-right: 10px;
+  margin-top: 5px;
 }
 
-.job-card h3 {
+.job-card h5 {
   padding-right: 3rem !important;
   margin-top: 0.5rem;
 }
@@ -31,4 +42,15 @@
 
 .job-ad-details p {
   margin: 0.25rem 0;
+}
+
+.employer-label,
+.address-label {
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+.employer,
+.address {
+  font-size: 0.9rem;
 }
