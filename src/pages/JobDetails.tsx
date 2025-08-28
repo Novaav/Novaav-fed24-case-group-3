@@ -11,6 +11,7 @@ import {
   LayoutBlockVariation,
   TypographyMetaVariation,
 } from "@digi/arbetsformedlingen";
+import "../css/JobDetails.css";
 
 export const JobDetails = () => {
   const { id } = useParams();
@@ -32,14 +33,36 @@ export const JobDetails = () => {
   return (
     <MasterDetailLayout>
       <DigiLayoutBlock afVariation={LayoutBlockVariation.PRIMARY}>
-        <DigiTypography>
-          <h2>{job.headline}</h2>
-          <DigiTypographyMeta afVariation={TypographyMetaVariation.PRIMARY}>
-            <p>Beskrivning</p>
-            <p slot="secondary">{job.description?.text}</p>
-          </DigiTypographyMeta>
-          {/* Lägg till mer info om jobbet här om du vill */}
-        </DigiTypography>
+        <div className="job-header-container">
+          {job.logo_url ? (
+            <img
+              src={job.logo_url}
+              alt={`${job.employer?.name} logotyp`}
+              className="job-logo-big"
+            />
+          ) : null}
+
+          <div className="job-details-content">
+            <DigiTypography>
+              <h2>{job.headline}</h2>
+              <DigiTypographyMeta afVariation={TypographyMetaVariation.PRIMARY}>
+                <p>
+                  <strong>Företag:</strong> {job.employer?.name}
+                </p>
+                <p>
+                  <strong>Ort:</strong> {job.workplace_address?.municipality}
+                </p>
+                <p>
+                  <strong>Region:</strong> {job.workplace_address?.region}
+                </p>
+                <p>
+                  <strong>Beskrivning:</strong>
+                </p>
+                <p slot="secondary">{job.description?.text}</p>
+              </DigiTypographyMeta>
+            </DigiTypography>
+          </div>
+        </div>
       </DigiLayoutBlock>
     </MasterDetailLayout>
   );
