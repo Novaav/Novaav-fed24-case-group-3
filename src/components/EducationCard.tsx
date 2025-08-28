@@ -44,18 +44,21 @@ export const EducationCard = ({
       >
         <DigiInfoCard
           afHeading={education.education?.title?.[0]?.content || ""}
-          afHeadingLevel={InfoCardHeadingLevel.H2}
+          afHeadingLevel={InfoCardHeadingLevel.H3}
           afType={InfoCardType.TIP}
-          afVariation={InfoCardVariation.PRIMARY}
+          afVariation={InfoCardVariation.SECONDARY}
           afSize={InfoCardSize.STANDARD}
         >
-          {education.education?.description?.[0]?.content?.slice(0, 60) +
-            "..." || ""}
           <div className="card-info">
+            <div>
+              <strong>Ämnesområde:</strong>{" "}
+              {education.education?.subject?.map((s) => s.name).join(", ") ||
+                "-"}
+            </div>
             <div className="provider-row">
               <span className="provider-label">Skola:</span>
               <span className="providers">
-                {education.providerSummary?.providers?.join(", ")}
+                {education.providerSummary?.providers?.join(", ") || "-"}
               </span>
             </div>
             <div className="pace-row">
@@ -67,10 +70,12 @@ export const EducationCard = ({
                   : "-"}
               </span>
             </div>
+            <div>
+              <strong>Utbildningskod:</strong> {education.id}
+            </div>
           </div>
         </DigiInfoCard>
       </li>
     </>
   );
 };
-
