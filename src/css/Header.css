@@ -46,6 +46,8 @@ nav .digi-header-navigation-item {
   }
 }
 
-.digi-form-filter__dropdown:last-child {
-  right: 0 !important;
+@media (min-width: 900px) {
+  .digi-form-filter__dropdown {
+    right: 0 !important;
+  }
 }
