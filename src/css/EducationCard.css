@@ -42,5 +42,5 @@
 .active {
   border-width: var(--digi--border-width--secondary);
   border-style: solid;
-  border-color: var(--digi--color-border-secondary);
+  border-color: var(--digi--color--border--primary);
 }

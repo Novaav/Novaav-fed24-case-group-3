@@ -42,7 +42,18 @@ nav .digi-header-navigation-item {
     position: unset;
   }
   nav .digi-header-navigation-item {
-    display: unset;
+    display: flex;
+    gap: 1rem;
+    margin: 0.5rem 0;
+  }
+  .digi-header-navigation-item-indicator {
+    display: none !important;
+  }
+  .digi-header .sc-digi-header .digi-form-filter {
+    margin-left: 0;
+  }
+  .digi-header-navigation__wrapper {
+    padding: 1rem !important;
   }
 }
 
