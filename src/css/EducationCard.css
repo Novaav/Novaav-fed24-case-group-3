@@ -38,3 +38,9 @@
   color: #2980b9;
   font-size: 0.98rem;
 }
+
+.active {
+  border-width: var(--digi--border-width--secondary);
+  border-style: solid;
+  border-color: var(--digi--color-border-secondary);
+}
