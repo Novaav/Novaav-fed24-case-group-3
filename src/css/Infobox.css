@@ -1,6 +1,5 @@
 .info-box {
   position: absolute;
-  top: 24px;
   right: 24px;
   background-color: #f5f5f5;
   color: #1f1f1f;
@@ -93,6 +92,8 @@
     max-height: none;
     margin-bottom: 16px;
     padding: 16px;
+    background-color: transparent;
+    box-shadow: none;
   }
 
   .actions {

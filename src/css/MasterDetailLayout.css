@@ -7,3 +7,14 @@
   flex: 1;
   padding: 2rem 0;
 }
+
+.slick-slide > div {
+  padding: 0 12px;
+}
+
+@media (max-width: 900px) {
+  .content-wrapper {
+    padding: 1rem 0;
+    overflow: visible;
+  }
+}
