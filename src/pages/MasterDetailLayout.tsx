@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import { useContext, useState } from "react";
 import { EducationContext } from "../context/EducationsContext";
-import { EducationCard } from "../components/EducationCard";
+import { EducationCard, type EducationData } from "../components/EducationCard";
 import { filterForLocation, filterForPaceOfStudy } from "../utils/Filter";
 import "../css/MasterDetailLayout.css";
 import "../css/educations.css";
@@ -15,7 +15,7 @@ export const MasterDetailLayout = ({
   onEducationClick,
 }: {
   children: ReactNode;
-  onEducationClick?: (education: any) => void;
+  onEducationClick?: (education: EducationData) => void;
 }) => {
   const [activeId, setActiveId] = useState<string | null>(null);
   const { educations, loading, error, filterLocation, filterPaceOfStudy } =
@@ -35,9 +35,19 @@ export const MasterDetailLayout = ({
   };
   const filteredEducations = filterData();
 
-  const handleEducationClick = (education: any) => {
-    setActiveId(education.id); // markera det här kortet som aktivt
-    onEducationClick?.(education); // kör ev. callback från props
+  useEffect(() => {
+    if (filteredEducations.length > 0) {
+      const first = filteredEducations[0];
+      setActiveId(first.id);
+      onEducationClick?.(first);
+    } else {
+      setActiveId(null);
+    }
+  }, [filteredEducations, onEducationClick]);
+
+  const handleEducationClick = (education: EducationData) => {
+    setActiveId(education.id);
+    onEducationClick?.(education);
   };
 
   const sliderSettings = {
@@ -70,6 +80,7 @@ export const MasterDetailLayout = ({
                 <EducationCard
                   education={education}
                   handleClick={() => onEducationClick?.(education)}
+                  isActive={education.id === activeId}
                 />
               </div>
             ))}
@@ -81,6 +92,7 @@ export const MasterDetailLayout = ({
                 key={education.id}
                 education={education}
                 handleClick={() => onEducationClick?.(education)}
+                isActive={education.id === activeId}
               />
             ))}
           </ul>
