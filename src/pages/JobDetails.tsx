@@ -3,15 +3,19 @@ import { MasterDetailLayout } from "./MasterDetailLayout";
 import { useContext } from "react";
 import { JobsContext } from "../context/JobsContext";
 import {
+  DigiButton,
   DigiLayoutBlock,
   DigiTypography,
   DigiTypographyMeta,
 } from "@digi/arbetsformedlingen-react";
 import {
+  ButtonSize,
+  ButtonVariation,
   LayoutBlockVariation,
   TypographyMetaVariation,
 } from "@digi/arbetsformedlingen";
 import "../css/JobDetails.css";
+import { Link } from "react-router";
 
 export const JobDetails = () => {
   const { id } = useParams();
@@ -64,6 +68,15 @@ export const JobDetails = () => {
           </div>
         </div>
       </DigiLayoutBlock>
+      <Link to="/jobs">
+        <DigiButton
+          afSize={ButtonSize.MEDIUM}
+          afVariation={ButtonVariation.SECONDARY}
+          afFullWidth={false}
+        >
+          Tillbaka till relaterade yrken
+        </DigiButton>
+      </Link>
     </MasterDetailLayout>
   );
 };

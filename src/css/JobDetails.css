@@ -7,3 +7,11 @@
 .job-details-content {
   width: 100%;
 }
+
+.digi-layout-block a {
+  text-decoration: none;
+}
+
+a {
+  text-decoration: none;
+}
