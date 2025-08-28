@@ -45,3 +45,7 @@ nav .digi-header-navigation-item {
     display: unset;
   }
 }
+
+.digi-form-filter__dropdown:last-child {
+  right: 0 !important;
+}
