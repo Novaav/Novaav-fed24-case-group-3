@@ -34,13 +34,16 @@ export const MasterDetailLayout = ({
     return filterForLocation(filter1, filterLocation);
   };
   const filteredEducations = filterData();
-  //  useeffect kollar om det finns utbildningar. om activeId är tomt ->sätt det första kortet
+
   useEffect(() => {
-    if (filteredEducations.length > 0 && activeId === null) {
-      setActiveId(filteredEducations[0].id);
-      onEducationClick?.(filteredEducations[0]); // om du vill visa detaljer direkt
+    if (filteredEducations.length > 0) {
+      const first = filteredEducations[0];
+      setActiveId(first.id);
+      onEducationClick?.(first);
+    } else {
+      setActiveId(null);
     }
-  }, [filteredEducations, activeId, onEducationClick]);
+  }, [filteredEducations, onEducationClick]);
 
   const handleEducationClick = (education: any) => {
     setActiveId(education.id);
