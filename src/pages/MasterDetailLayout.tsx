@@ -63,23 +63,13 @@ export const MasterDetailLayout = ({
       <aside className="sidebar">
         {loading && <p>Laddar...</p>}
         {error && <p>Det gick inte att hämta utbildningar.</p>}
-        <ul>
-          {filteredEducations.map((education) => (
-            <EducationCard
-              key={education.id}
-              education={education}
-              handleClick={() => handleEducationClick?.(education)}
-              isActive={education.id === activeId}
-            />
-          ))}
-        </ul>
         {isMobile ? (
           <Slider {...sliderSettings}>
             {filteredEducations.map((education) => (
               <div key={education.id}>
                 <EducationCard
                   education={education}
-                  handleClick={() => onEducationClick?.(education)}
+                  handleClick={() => handleEducationClick?.(education)}
                   isActive={education.id === activeId}
                 />
               </div>
@@ -91,7 +81,7 @@ export const MasterDetailLayout = ({
               <EducationCard
                 key={education.id}
                 education={education}
-                handleClick={() => onEducationClick?.(education)}
+                handleClick={() => handleEducationClick?.(education)}
                 isActive={education.id === activeId}
               />
             ))}
