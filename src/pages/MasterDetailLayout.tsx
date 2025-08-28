@@ -5,7 +5,7 @@ import { EducationCard } from "../components/EducationCard";
 import { filterForLocation, filterForPaceOfStudy } from "../utils/Filter";
 import "../css/MasterDetailLayout.css";
 import "../css/educations.css";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -34,10 +34,17 @@ export const MasterDetailLayout = ({
     return filterForLocation(filter1, filterLocation);
   };
   const filteredEducations = filterData();
+  //  useeffect kollar om det finns utbildningar. om activeId är tomt ->sätt det första kortet
+  useEffect(() => {
+    if (filteredEducations.length > 0 && activeId === null) {
+      setActiveId(filteredEducations[0].id);
+      onEducationClick?.(filteredEducations[0]); // om du vill visa detaljer direkt
+    }
+  }, [filteredEducations, activeId, onEducationClick]);
 
   const handleEducationClick = (education: any) => {
-    setActiveId(education.id); // markera det här kortet som aktivt
-    onEducationClick?.(education); // kör ev. callback från props
+    setActiveId(education.id);
+    onEducationClick?.(education);
   };
 
   const sliderSettings = {
@@ -70,6 +77,7 @@ export const MasterDetailLayout = ({
                 <EducationCard
                   education={education}
                   handleClick={() => onEducationClick?.(education)}
+                  isActive={education.id === activeId}
                 />
               </div>
             ))}
@@ -81,6 +89,7 @@ export const MasterDetailLayout = ({
                 key={education.id}
                 education={education}
                 handleClick={() => onEducationClick?.(education)}
+                isActive={education.id === activeId}
               />
             ))}
           </ul>
