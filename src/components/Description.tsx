@@ -50,14 +50,16 @@ export const Description = ({ education }: DescriptionProps) => {
   const infoData = {
     program: title || "Okänt program",
     credits: education.education?.credits?.credits || "Ej angivet",
-    location,
     pace,
     website: education.education?.url || education.applicationUrl || null,
   };
 
   return (
     <div style={{ position: "relative" }}>
-      <InfoBox education={infoData} />
+      <InfoBox
+        education={infoData}
+        providerSummary={education.providerSummary}
+      />
 
       <DigiLayoutBlock afVariation={LayoutBlockVariation.PRIMARY}>
         <DigiTypography>
