@@ -15,7 +15,6 @@ import {
   TypographyMetaVariation,
 } from "@digi/arbetsformedlingen";
 import "../css/JobDetails.css";
-import { Link } from "react-router";
 
 export const JobDetails = () => {
   const { id } = useParams();
@@ -44,36 +43,39 @@ export const JobDetails = () => {
           afFullWidth={false}
           onClick={() => navigate(-1)}
         >
-          {`Gå tillbaka`}
+          Gå tillbaka
         </DigiButton>
-        <div className="job-header-container">
-          {job.logo_url ? (
-            <img
-              src={job.logo_url}
-              alt={`${job.employer?.name} logotyp`}
-              className="job-logo-big"
-            />
-          ) : null}
 
-          <div className="job-details-content">
-            <DigiTypography>
-              <h2>{job.headline}</h2>
-              <DigiTypographyMeta afVariation={TypographyMetaVariation.PRIMARY}>
-                <p>
-                  <strong>Företag:</strong> {job.employer?.name}
-                </p>
-                <p>
-                  <strong>Ort:</strong> {job.workplace_address?.municipality}
-                </p>
-                <p>
-                  <strong>Region:</strong> {job.workplace_address?.region}
-                </p>
-                <p>
-                  <strong>Beskrivning:</strong>
-                </p>
-                <p slot="secondary">{job.description?.text}</p>
-              </DigiTypographyMeta>
-            </DigiTypography>
+        <div className="job-description-wrapper">
+          <div className="job-card">
+            {/* Logga + Titel */}
+            <div className="job-header">
+              {job.logo_url && (
+                <img
+                  src={job.logo_url}
+                  alt={`${job.employer?.name} logotyp`}
+                  className="job-logo"
+                />
+              )}
+              <h2 className="job-title">{job.headline}</h2>
+            </div>
+
+            {/* Jobbdetaljer */}
+            <DigiTypographyMeta afVariation={TypographyMetaVariation.PRIMARY}>
+              <p>
+                <strong>Företag:</strong> {job.employer?.name}
+              </p>
+              <p>
+                <strong>Ort:</strong> {job.workplace_address?.municipality}
+              </p>
+              <p>
+                <strong>Region:</strong> {job.workplace_address?.region}
+              </p>
+              <p>
+                <strong>Beskrivning:</strong>
+              </p>
+              <p slot="secondary">{job.description?.text}</p>
+            </DigiTypographyMeta>
           </div>
         </div>
       </DigiLayoutBlock>

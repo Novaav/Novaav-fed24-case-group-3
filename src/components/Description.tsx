@@ -62,40 +62,44 @@ export const Description = ({ education }: DescriptionProps) => {
       />
 
       <DigiLayoutBlock afVariation={LayoutBlockVariation.PRIMARY}>
-        <DigiTypography>
-          <h2>{schoolName}</h2>
+        <div className="description-wrapper">
+          <DigiTypography>
+            <h2 className="education-title">{schoolName}</h2>
 
-          <DigiTypographyMeta afVariation={TypographyMetaVariation.PRIMARY}>
-            <p>{title}</p>
-            <p slot="secondary" className="text">
-              {schoolName}, {location}, {schoolForm},{" "}
-              {distance ? "Distans" : "Platsbunden"}
-            </p>
-          </DigiTypographyMeta>
+            <DigiTypographyMeta afVariation={TypographyMetaVariation.PRIMARY}>
+              <p>{title}</p>
+              <p slot="secondary" className="text">
+                {schoolName}, {location}, {schoolForm},{" "}
+                {distance ? "Distans" : "Platsbunden"}
+              </p>
+            </DigiTypographyMeta>
 
-          <DigiTypographyMeta afVariation={TypographyMetaVariation.PRIMARY}>
-            <p>Information om utbildningen</p>
-            <DigiList afListType={ListType.BULLET}>
-              <li>Stidietakt: {pace} %</li>
-              <li>
-                {distance ? "Utbildning på distans" : "Platsbunden utbildning"}
-              </li>
-            </DigiList>
-          </DigiTypographyMeta>
+            <DigiTypographyMeta afVariation={TypographyMetaVariation.PRIMARY}>
+              <p>Information om utbildningen</p>
+              <DigiList afListType={ListType.BULLET}>
+                <li>Studietakt: {pace} %</li>
+                <li>
+                  {distance
+                    ? "Utbildning på distans"
+                    : "Platsbunden utbildning"}
+                </li>
+              </DigiList>
+            </DigiTypographyMeta>
 
-          <DigiTypographyMeta afVariation={TypographyMetaVariation.PRIMARY}>
-            <p>Behörigheter du kommer besitta</p>
-            <p slot="secondary">{eligibility}</p>
-          </DigiTypographyMeta>
+            <DigiTypographyMeta afVariation={TypographyMetaVariation.PRIMARY}>
+              <p>Behörigheter du kommer besitta</p>
+              <p slot="secondary">{eligibility}</p>
+            </DigiTypographyMeta>
 
-          <DigiTypographyMeta afVariation={TypographyMetaVariation.PRIMARY}>
-            <p>Beskrivning av utbildningen</p>
-            <p
-              slot="secondary"
-              dangerouslySetInnerHTML={{ __html: description || "" }}
-            />
-          </DigiTypographyMeta>
-        </DigiTypography>
+            <DigiTypographyMeta afVariation={TypographyMetaVariation.PRIMARY}>
+              <p>Beskrivning av utbildningen</p>
+              <p
+                slot="secondary"
+                dangerouslySetInnerHTML={{ __html: description || "" }}
+              />
+            </DigiTypographyMeta>
+          </DigiTypography>
+        </div>
       </DigiLayoutBlock>
     </div>
   );
