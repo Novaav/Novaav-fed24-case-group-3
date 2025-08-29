@@ -1,0 +1,160 @@
+/* INFO BOX – BLÅ POST-IT STYLE */
+.info-box {
+  position: absolute;
+  right: 24px;
+  top: 24px;
+  background-color: #e6f0ff; 
+  color: #1f1f1f;
+  padding: 24px;
+  border-radius: 12px;
+  width: 320px;
+  height: 380px;
+  overflow-y: auto;
+  z-index: 10;
+  font-family: "Inter", sans-serif;
+  font-size: 1rem;
+  line-height: 1.5;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+  border-top: 4px solid #0073e6; 
+  transform: rotate(0deg); 
+  background-image: repeating-linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0.08) 0px,
+    rgba(255, 255, 255, 0.08) 1px,
+    transparent 1px,
+    transparent 4px
+  ); /* subtil pappersstruktur */
+}
+
+/* “Snodd” på toppen */
+.info-box::before {
+  content: "";
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 6px;
+  background-color: #0073e6;
+  border-radius: 3px;
+}
+
+/* Rubrik */
+.info-box h4 {
+  margin: 0 0 16px 0;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #0a1f44;
+  position: relative;
+}
+
+/* Subtil linje under rubrik */
+.info-box h4::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 40%;
+  height: 3px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, #0073e6, #00d4ff);
+  transition: width 0.5s ease;
+}
+
+.info-box h4:hover::after {
+  width: 100%;
+}
+
+/* Listor */
+.info-box ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0 0 20px 0;
+}
+
+.info-box li {
+  position: relative;
+  padding-left: 1.6rem;
+  margin-bottom: 10px;
+  font-size: 1rem;
+  color: #1f1f1f;
+}
+
+.info-box li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #0073e6;
+  font-weight: 700;
+}
+
+/* Action-knappar */
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.btn {
+  font-family: "Inter", sans-serif;
+  border: none;
+  border-radius: 6px;
+  padding: 12px 18px;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: transform 0.25s ease-in-out, background-color 0.25s ease-in-out,
+    box-shadow 0.25s ease-in-out, color 0.25s ease-in-out;
+  backface-visibility: hidden;
+}
+
+.btn:hover {
+  transform: scale(1.03);
+  background-color: #d0e4ff;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+}
+
+.btn:active {
+  transform: scale(0.96);
+}
+
+.btn.primary {
+  background: #0073e6;
+  color: #ffffff;
+}
+
+.btn.secondary {
+  background: #f5f5f5;
+  color: #1f1f1f;
+}
+
+.btn.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* Responsiv */
+@media (max-width: 900px) {
+  .info-box {
+    position: static;
+    width: 100%;
+    height: auto;
+    max-height: none;
+    margin-bottom: 16px;
+    padding: 16px;
+    transform: rotate(0deg);
+    border-top: 4px solid #0073e6;
+    background-image: none;
+  }
+
+  .actions {
+    flex-direction: row;
+    gap: 8px;
+  }
+
+  .info-box::before {
+    display: none;
+  }
+}

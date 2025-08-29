@@ -4,7 +4,6 @@ import {
 } from "@digi/arbetsformedlingen";
 import { DigiFormInputSearch } from "@digi/arbetsformedlingen-react";
 import { useNavigate, useLocation } from "react-router";
-import "../css/searchField.css";
 
 interface SearchFieldProps {
   searchText: string;

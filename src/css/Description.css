@@ -1,3 +1,143 @@
-.text {
-  text-transform: capitalize;
+/* WRAPPER */
+.description-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  font-family: "Inter", sans-serif;
+  width: 100%;
+  max-width: 100%;
+  padding: 2rem 0;
+  color: #1a1a1a;
+  perspective: 1200px;
 }
+
+/* Små 3D-vibbar */
+.description-wrapper > * {
+  transform-style: preserve-3d;
+  transform: rotateX(0.4deg) rotateY(-0.4deg);
+  transition: transform 0.8s ease;
+}
+
+/* TITEL (utbildningens namn) */
+.education-title {
+  display: inline-block;
+  font-size: 2.6rem;
+  font-weight: 900;
+  color: #0a1f44;
+  letter-spacing: -0.8px;
+  margin-bottom: 1.2rem;
+  line-height: 1.2;
+  padding-bottom: 0.35rem;
+  position: relative;
+}
+
+/* Linje med långsammare ray/glitter animation */
+.education-title::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 5px;
+  width: 100%;
+  border-radius: 3px;
+  background: linear-gradient(90deg, #0073e6, #6f42c1, #00c6ff);
+  background-size: 200% 100%;
+  animation: rayMove 12s linear infinite; /* längre, subtil */
+}
+
+@keyframes rayMove {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* SUBRUBRIKER */
+.description-wrapper h4 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #0073e6;
+  margin-top: 1.8rem;
+  margin-bottom: 0.8rem;
+  line-height: 1.4;
+  position: relative;
+}
+
+.description-wrapper h4::before {
+  content: "▸";
+  position: absolute;
+  left: -1.6rem;
+  color: #6f42c1;
+  font-size: 1.1rem;
+  font-weight: bold;
+  transform: translateY(2px);
+}
+
+/* TEXT */
+.description-wrapper p {
+  font-size: 1.12rem;
+  line-height: 1.8;
+  color: #2c3e50;
+  margin: 0.6rem 0;
+}
+
+/* LISTOR */
+.description-wrapper ul {
+  list-style: none;
+  padding-left: 1.5rem;
+  margin-top: 1rem;
+}
+
+.description-wrapper li {
+  position: relative;
+  padding-left: 2rem;
+  margin-bottom: 1rem;
+  font-size: 1.08rem;
+  color: #3b4a5a;
+  line-height: 1.7;
+}
+
+/* Riktiga check-märken istället för symboler */
+.description-wrapper li::before {
+  content: "✔";
+  position: absolute;
+  left: 0;
+  top: 0.1rem;
+  color: #0073e6;
+  font-size: 1.1rem;
+  font-weight: bold;
+  text-shadow: 0 0 4px rgba(0,115,230,0.3);
+}
+
+/* LYXIG SEPARATION */
+.description-wrapper > div {
+  margin-bottom: 2.5rem;
+  background: transparent;
+  border-left: 4px solid rgba(0,115,230,0.15);
+  padding-left: 1.2rem;
+  transition: border-color 0.6s ease;
+}
+
+.description-wrapper > div:hover {
+  border-color: rgba(0,115,230,0.35);
+}
+
+/* Fade-in + slide-in animation */
+@keyframes fadeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.description-wrapper > * {
+  animation: fadeSlideIn 0.6s ease forwards;
+  opacity: 0;
+}
+
+.description-wrapper > *:nth-child(1) { animation-delay: 0.1s; }
+.description-wrapper > *:nth-child(2) { animation-delay: 0.25s; }
+.description-wrapper > *:nth-child(3) { animation-delay: 0.4s; }
+.description-wrapper > *:nth-child(4) { animation-delay: 0.55s; }

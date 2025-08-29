@@ -1,0 +1,112 @@
+
+.job-description-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  font-family: "Inter", sans-serif;
+  width: 100%;
+  padding: 2rem 0;
+  perspective: 1200px;
+}
+
+
+.job-card {
+  position: relative;
+  background-color: #e6f0ff; 
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 12px 28px rgba(0,0,0,0.08);
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  overflow: hidden;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-top: 4px solid #0073e6; /* “tejpad kant” */
+  background-image: repeating-linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0.08) 0px,
+    rgba(255, 255, 255, 0.08) 1px,
+    transparent 1px,
+    transparent 4px
+  ); /* subtil pappersstruktur */
+  transform-style: preserve-3d;
+  transition: transform 0.5s ease, box-shadow 0.5s ease;
+}
+
+/* Subtil hover 3D-effekt */
+.job-card:hover {
+  transform: rotateX(0.2deg) rotateY(-0.2deg);
+  box-shadow: 0 16px 36px rgba(0,0,0,0.12);
+}
+
+/* Header med logga */
+.job-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.job-logo {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.job-title {
+  font-size: 1.8rem;
+  font-weight: 900;
+  color: #0a1f44;
+  margin: 0;
+  line-height: 1.2;
+  flex: 1;
+}
+
+
+.job-card p {
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: #1f1f1f;
+  margin: 0.5rem 0;
+}
+
+.job-card p[slot="secondary"] {
+  color: #3b4a5a;
+}
+
+
+@keyframes fadeSlideIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.job-card {
+  animation: fadeSlideIn 0.6s ease forwards;
+}
+
+@media (max-width: 900px) {
+  .job-description-wrapper {
+    padding: 1rem 0;
+  }
+
+  .job-card {
+    padding: 16px;
+    border-radius: 12px;
+    border-top: 4px solid #0073e6;
+    background-image: none;
+  }
+
+  .job-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .job-logo {
+    width: 50px;
+    height: 50px;
+  }
+}

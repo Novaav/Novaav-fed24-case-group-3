@@ -1,33 +1,58 @@
 .education-card {
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  padding: 1.5rem 1.2rem;
-  margin-bottom: 1.2rem;
+  margin-bottom: 1.5rem;
   list-style: none;
-  transition: box-shadow 0.2s;
-  border: 1px solid #eaeaea;
+  border-radius: 1rem;
+  background: rgb(244, 244, 244);
+  padding: 1.2rem 1.5rem;
+  transition: all 0.25s ease-in-out;
+  border: 1px solid rgba(0,0,0,0.06);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.04);
 }
 
 .education-card:hover {
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.14);
-  border-color: #d0d0d0;
+  transform: translateY(-4px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+  cursor: pointer;
 }
 
-.education-card h4 {
-  margin: 0 0 0.5rem 0;
-  font-size: 1.2rem;
-  color: #1e1e1e;
+.education-card.active {
+  border: 2px solid #0057b8;
+  box-shadow: 0 6px 20px rgba(0,87,184,0.25);
 }
 
-.education-card p {
-  margin: 0.3rem 0;
-  color: #555;
-  font-size: 1rem;
+.card-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #2c3e50;
+  margin-bottom: 0.5rem;
 }
 
-.education-card .providers {
-  margin-top: 0.7rem;
-  font-size: 0.95rem;
-  font-weight: 500;
+.card-info {
+  margin-top: 0.6rem;
+  font-size: 0.9rem;
+  color: #4a5568;
+}
+
+.card-info p {
+  margin: 0.25rem 0;
+}
+
+.provider-row,
+.pace-row {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.provider-label,
+.pace-label {
+  font-weight: 600;
+  color: #34495e;
+  font-size: 0.85rem;
+}
+
+.providers,
+.pace {
+  color: #0057b8;
+  font-size: 0.85rem;
 }

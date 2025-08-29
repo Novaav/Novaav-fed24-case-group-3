@@ -5,7 +5,7 @@ export const filterForLocation = (
   filterLocation: string[]
 ) => {
   if (filterLocation && filterLocation.length) {
-    const filteredData = data.filter((item /**TODO: fix typing */) => {
+    const filteredData = data.filter((item) => {
       const locations = item.eventSummary?.regionCode;
       let existing = false;
       filterLocation?.forEach((i) => {
